@@ -1,1 +1,8 @@
 theme: jekyll-theme-minimal
+
+title: Lemon's Homepage
+description:  A hoempage for Lemon
+
+logo: https://raw.githubusercontent.com/gaoljhy/gaoljhy.github.io/master/logo.jpeg
+show_downloads: false
+

@@ -1,37 +1,27 @@
-## Welcome to GitHub Pages
+## Welcome to My BlogPages
 
-You can use the [editor on GitHub](https://github.com/gaoljhy/blog/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Here is My Blog category
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/gaoljhy/blog/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+1. [Pc端]()
+    1. [Linux]()
+    2. [Windows]()
+    3. [OSx]()
+    4. [工具集合]()
+2. [Web端]()
+    1. [框架类]()
+3. [移动端]()
+    1. [Android]()
+    2. [ios]()
+4. [语言类]()
+    1. [语言类入门]()
+    2. [语言类高级]()
+5. [硬件]()
+    1. [union板]()
+    2. [树莓派]()
+6. [比赛类]()
+    1. [ACM]()
+7. [前沿类]()
+    1. [使用记录]()
+    2. [论文]()
+8. [SkillNote]()
