@@ -1,8 +1,6 @@
 一、allintitle:
 当 我们用allintitle提交查询的时分，Google会限止搜索结果仅是那些在网页题目里面包含了我们所有查询网站关键词的网页。例 ［allintitle: detect plagiarism］，提交这个查询，Google仅会回返在网页题目里面包含了"detect"和"plagiarism"这两个网站关键词的网页。
 
-二、bphonebook:
-用bphonebook施行查询的时分，回返结果将是那些商务电话资料。
 
 三、allinanchor:
 anchor 是一处申说性的书契，它标注申说了这个链接可能跳转到其他的网页或跳转到现时网页的不一样地方。当我们用allinanchor提交查询的时 候，Google会限止搜索结果务必是那些在anchor书契里包含了我们所有查询网站关键词的网页。例[ allinanchor: best museums Sydney ] ,提交这个查询，Google仅只会回返在网页anchor申说书契里面包含了网站关键词"best" "museums" 和"Sydney"的网面。
@@ -15,26 +13,34 @@ anchor 是一处申说性的书契，它标注申说了这个链接可能跳转�
 
 六、allintext:
 当 我们用allintext提交查询的时分，Google会限止搜索结果仅只是在网页正文里面包含了我们所有查询网站关键词的网页。例［allintext: travel packing list］,提交这个查询，Google仅只会回返在一个网页包含了三个网站关键词"travel" "packing"和"list"的网页。http://www.yixiin.com/news/
-七、ext:
-这是一个没有证实的语法，可以用于filetype:查寻廓张名为ext的文件。
 
-八、datarange:
-当 我们使役datarange施行查询的时分，Google会将查询结果限止在一个特定的时间段内，这个时间相对于网站来说，是按网站被google收录 的时间算的。例　"Geri Halliwell" "Spice Girls" daterange:2450958-2450968　。这搭的时间日子款式是按天文学的儒略日。（这个搜索语法Google并不引荐使役，因为它会回返 一点莫名其妙的物品）
+---
+## datarange
+当 我们使役`datarange`查询的时分，Google会将查询结果限止在一个特定的时间段内，这个时间相对于网站来说，是按网站被 **google收录** 的时间算的。
+>例:　
+```
+"Geri Halliwell" "Spice Girls" daterange:2450958-2450968　
+```
+>
+>这搭的时间日子款式是按天文学的儒略日。（这个搜索语法Google并不引荐使役，因为它会回返 一点莫名其妙的物品）
 
 九、define:
 当我们用define施行查询的时分，Google会回返包含查询网站关键词定义的网面。例［define: blog］，这个查询将会回返Blog的定义。
 
-十、author:
-当 我们用author施行查询的时分，Google会限止回返结果仅只是那些在Google论坛里面，包含了特定笔者的新闻文章。在这搭，笔者名可以是全 名，也可以是一局部或邮件地址。例［children author:john author:doe］或［children author:doe@someaddress.com］回返结果将是笔者John Doe 或是 doe@someaddress.com写的，关于包含网站关键词children的文章。
-
-十一、id:
-又是一个没有证实的语法，效果很普通。
-
 十二、group:
 当 我们用group查询的时分，Google会限止我们的论坛查询结果仅是某几个固定的论坛组或是某些特定正题组的新闻文章。例［sleep group:misc.kids.moderated］，提交这个查询，Google仅会回返在用户组misc.kids.moderated里面包含了 查询关键字"sleep"的文章。
 
-十三、filetype:
-当 我们在查询里面包含filetype:扩展名的时分，Google会限止查询结果仅回返特定文件类型的网页。例［资产评估　 filetype:pdf］，这个查询将会回返所有文件类型为pdf的资产评估信息。其他可用的特定文件类型款式查询还有doc ,txt,ppt,xls.rtf,swf,ps等。
+---
+## filetype:
+
+当 我们在查询里面包含`filetype:`扩展名的时分，Google会限止查询结果仅回返特定文件类型的网页。
+
+>例:
+```
+资产评估　 filetype:pdf
+```
+>这个查询将会回返所有文件类型为`pdf`的资产评估信息 <br/>
+>其他可用的特定文件类型款式查询还有doc ,txt,ppt,xls.rtf,swf,ps等。
 
 十四、inanchor:
 当 我们用inanchor提交查询的时分，Google会限止结果是那些在网页anchor链接里面包含了查询网站关键词的网页。例［restaurants inanchor:gourmet］，提交这个查询，Google会查询那些在anchor信息里包含了网站关键词"restaurants"和网站关键词 "gourmet"的网页。
@@ -60,8 +66,11 @@ anchor 是一处申说性的书契，它标注申说了这个链接可能跳转�
 二十一、insubject:
 当 我们用insubject施行查询的时分，Google会限止论坛搜索结果仅是那些在正题里面包含了查询网站关键词的网 面。［insubject:"falling asleep"］，提交这个查询，Google会回返在文章正题里面包含了"falling asleep"的文章。
 
-二十二、movie:
-当我们用movie提交查询的时分，Google会回返跟查询网站关键词相关的电影信息。(现时只支持英文Google)
+---
+## movie:
+
+当我们用`movie`提交查询的时分，Google会回返跟查询网站关键词相关的电影信息。
+>(现时只支持英文Google)
 
 二十三、phonebook:
 当我们用phonebook施行查询的时分，Google会回返美国当地跟查询网站关键词相关的电话信息。（使役phonebook的时分需要指定详细的州名和地点名）例，［phonebook:smith ca］
@@ -90,14 +99,34 @@ anchor 是一处申说性的书契，它标注申说了这个链接可能跳转�
 三十一、weather:
 当我们用weather提交查询的时分，假如我们指出一个Google可以识别的地区或城市，Google会回返该地区或城市现时的天气状态。
 
-三十二、" "
-精密般配精密般配—双引号 假如输入的查询词很长，百度在经不为己甚析后，给出的搜索结果中的查询词，可能是拆分的。假如您对这种情况不满，可以尝试让百度不拆分查询词。给查询词加上双引号，就可以达到这种效果。如："赛欧seo服务"
+---
+## `" "`
 
-三十三、-
-要求搜索结果中不含特定查询词 假如您发现搜索结果中，有某一类网页是您不期望瞧见的，而且，这些网页都包含特定的网站关键词，那么用减号语法，就可以去除所有这些包括特定网站关键词的网页。如：seo服务 -赛欧
+精密般配—双引号
 
-三十四、title:
-"title: "用于针对题目施行搜索,":"后面需要空格。例如：搜索 title: 张学友 ，搜引得擎会回返所有题目中包含"张学友"的网页。因为网页的题目通常会正确的描写网页的内容，所以使役"title: "施行搜索的效果可能更精密。
+假如输入的查询词很长，搜索引擎是自动拆开搜素
+
+通过加`""`这样可以防止被拆分
+
+## `-`
+要求搜索结果中不含特定查询词 
+
+假如您发现搜索结果中，有某一类网页是您不期望瞧见的，而且，这些网页都包含特定的网站关键词
+
+那么用减号语法，就可以去除所有这些包括特定网站关键词的网页。
+>如：seo服务 -赛欧
+
+---
+## title
+`title: `用于针对题目施行搜索
+
+`:`后面需要空格
+
+>例：
+
+>搜索 `title: 张学友` <br/>
+>搜引得擎会回返所有题目中包含`张学友`的网页。<br/>
+>因为网页的题目通常会正确的描写网页的内容所以使役`title: `施行搜索的效果可能更精密。
 
 三十五、hostname:
 的用处与"site："、"domain："相同，只然而使役"hostname："时回返的只是在现时域名下的网页，而不涵盖其子域名中的网页。
