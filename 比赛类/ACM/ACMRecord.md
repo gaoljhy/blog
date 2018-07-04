@@ -42,45 +42,6 @@
     ```
 
 ---
-## 常用函数(都将基于`g++`，与其他编译器很大出入)
-
-### 1. `string`库
-
-| 函数                                   | 作用                                      | 注意⚠️                                                                                   |
-| :------------------------: | :---------------------------: | :--------------------------: |
-| `str.lenght()` 或 `str.size()`         | 测字符串长度 ，返回长度为字符长度         | 以`1`起始记数 |
-| `str.push_back('c')`|在尾部添加一个字符| 没有**返回值(`void`)**
-|`str.pop_back()` | 在尾部删除一个字符 | 没有**返回值(`void`)**                                                       |
-### 2. `algorithm`库 
-
-| 函数                                   | 作用                                      | 注意⚠️                                                                                   |
-| :------------------------: | :---------------------------: | :--------------------------: |
-| `max(a,b)` 或 `min(a,b)`               | 返回数中最大或最小值                      | 可在`int,long,double`等数值型数据中使用<br/>且正负数也考虑在内<br/>相等时，随便输出一个 |
-
-### 3. `vector`库
-
-| 函数                                   | 作用                                      | 注意⚠️                                                                                   |
-| :------------------------: | :---------------------------: | :--------------------------: |
-|`vec.size()`|Return size |以`1`起始记数
-|`vec.push_back(vecEle))`|Add element at the end |  `resize`之后的那部分并不是空的<br/>添加到末尾，之前要看是否与`resize`冲突
-|`vec.pop_back()`|Delete last element | 删除一个从末尾，size -1
-|`vec.resize(unsigned int,<value>)`|Change size |如果往大扩展，后面空白的以`value`补，其`value`默认为`0`<br/>往小扩展，从末尾往前删除，留下前面的
-|`vec.clear()`|删除 `vec`每一个元素，使 `size` 为 `0` | 重复使用时，每次循环调用同一个`vector`都需要此函数 
-|`vec.insert()`|Insert elements| 
-|`vec.erase()`|Erase elements|
-|`vec.swap()`|Swap content |
-|`vec.emplace()` |Construct and insert element|
-|`vec.emplace_back()  `|Construct and insert element at the end |
-|`vec.max_size`|Return maximum size |
-|`vec.capacity()`|Return size of allocated storage capacity |
-|`vec.empty()`|Test whether vector is empty|
-|`vec.reserve()`|Request a change in capacity |
-|`vec.shrink_to_fit()`|Shrink to fit|
-
-
-
-
-
 
 
 -----
