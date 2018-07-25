@@ -5,7 +5,7 @@
 三、allinanchor:
 anchor 是一处申说性的书契，它标注申说了这个链接可能跳转到其他的网页或跳转到现时网页的不一样地方。当我们用allinanchor提交查询的时 候，Google会限止搜索结果务必是那些在anchor书契里包含了我们所有查询网站关键词的网页。例[ allinanchor: best museums Sydney ] ,提交这个查询，Google仅只会回返在网页anchor申说书契里面包含了网站关键词"best" "museums" 和"Sydney"的网面。
 
-四、allinurl:
+四、`allinurl:`
 当 我们用allinurl提交查询的时分，Google会限止搜索结果仅是那些在URL（网址）里面包含了我们所有查询网站关键词的网页。例 ［allinurl: google faq］，提交这个查询，Google仅会回返在URL里面包含了网站关键词"google"和"faq"的网页，象www.google.com/help /faq.html等的网页。
 
 五、cache:
