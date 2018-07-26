@@ -25,4 +25,11 @@
     ```
     ifconfig 网卡 网卡项  值
     ```
+例：
+```
+ifconfig eth0 down
+ifconfig eth0 hw ether 00:0C:18:EF:FF:ED
+ifconfig eth0 up 
+```
+
 > 当然有些值需要遵循固定的协议规定，否则不会改变
