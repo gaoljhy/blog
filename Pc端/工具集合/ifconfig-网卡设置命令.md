@@ -19,7 +19,7 @@
     ifconfig flush
     ```
 
-4. 修改某一网卡的`mac`, `ip`, `netmask` 等`ifconfig`中所展示的信息
+4. 修改某一网卡的`mac`, `ip`, `netmask` 等`ifconfig`中所展示的信息 ,`ip`可默认省略
 
 > 有些不对应的可以使用`man` 查询对应`parameter`<br/>
     ```
