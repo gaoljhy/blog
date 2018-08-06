@@ -7,55 +7,104 @@
 #### 直接粘贴复制
 
 ```
-deb http://mirrors.ustc.edu.cn/kali kali main non-free contrib
-
-deb-src http://mirrors.ustc.edu.cn/kali kali main non-free contrib
-
-deb http://mirrors.ustc.edu.cn/kali-security kali/updates main contrib non-free  
-
 # Kali 源：
 
-deb http://http.kali.org/kali kali main non-free contrib
-deb-src http://http.kali.org/kali kali main non-free contrib
-deb http://security.kali.org/kali-security kali/updates main contrib non-free
-deb http://ftp.sjtu.edu.cn/debian wheezy main non-free contrib
-deb-src http://ftp.sjtu.edu.cn/debian wheezy main non-free contrib
-deb http://ftp.sjtu.edu.cn/debian wheezy-proposed-updates main non-free contrib
-deb-src http://ftp.sjtu.edu.cn/debian wheezy-proposed-updates main non-free contrib
-deb http://ftp.sjtu.edu.cn/debian-security wheezy/updates main non-free contrib
-deb-src http://ftp.sjtu.edu.cn/debian-security wheezy/updates main non-free contrib
+
+#科大的云
+deb http://mirrors.ustc.edu.cn/kali sana main non-free contrib
+deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib 
+deb-src http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib
+deb http://mirrors.ustc.edu.cn/kali-security sana/updates main contrib non-free
+deb http://mirrors.ustc.edu.cn/kali-security kali-current/updates main contrib non-free 
+deb-src http://mirrors.ustc.edu.cn/kali-security kali-current/updates main contrib non-free
+#阿里云
+deb http://mirrors.aliyun.com/kali sana main non-free contrib
+deb-src http://mirrors.aliyun.com/kali sana main non-free contrib
+deb http://mirrors.aliyun.com/kali-security sana/updates main contrib non-free
+# 163 源
 deb http://mirrors.163.com/debian wheezy main non-free contrib
 deb-src http://mirrors.163.com/debian wheezy main non-free contrib
 deb http://mirrors.163.com/debian wheezy-proposed-updates main non-free contrib
 deb-src http://mirrors.163.com/debian wheezy-proposed-updates main non-free contrib
 deb-src http://mirrors.163.com/debian-security wheezy/updates main non-free contrib
 deb http://mirrors.163.com/debian-security wheezy/updates main non-free contrib
+#新加坡kali源
+deb http://mirror.nus.edu.sg/kali/kali/ kali main non-free contrib
+deb-src http://mirror.nus.edu.sg/kali/kali/ kali main non-free contrib
+deb http://security.kali.org/kali-security kali/updates main contrib non-free
+deb http://mirror.nus.edu.sg/kali/kali-security kali/updates main contrib non-free
+deb-src http://mirror.nus.edu.sg/kali/kali-security kali/updates main contrib non-free
 ```
 
 > 更新操作：`apt-get update && apt-get dist-upgrade` <br>
->  删除废弃软件 `apt-get autoremove `
+>  删除废弃软件 `apt autoremove `
 
-----
-2. kali-linux安装中文字体和五笔拼音输入法：（以下任意选择一种安装）：
+
+注意 更新`dist`有些以前的版本会不能用 ,但是最新工具会增多
+
+--------
+
+
+## 2. 虚拟机 `vmtools`
+
+`apt-get install open-vm-tools-desktop fuse`　//安装虚拟机VMtools增强工具
+
+如果安装后还是无法在物理机和虚拟机之间复制粘贴文件的话，可能是你安装了虚拟机自带`vmware-tools`，所以要先把你安装的vmware-tools卸载
+
+打开终端输入命令：`vmware-uninstall-tools.pl`
+
+回车即可删除 在安装就可以了
+
+
+## 3.其他一些常用软件
 ```
-     apt-get install fcitx-table-wbpy ttf-wqy-microhei ttf-wqy-zenhei                       #拼音五笔
+apt-get install xarchliver  //解压缩软件图形界面
 
-     apt-get install ibus ibus-pinyin                                                                             #经典的ibus
+apt-get install ristretto   //Xfce 桌面环境下的图片查看器。
 
-     apt-get install fcitx fcitx-googlepinyin fcitx-pinyin fcitx-module-cloudpinyin     #fcitx拼音  
+apt-get install xfce4-screenshooter  //屏幕截图软件
+
+apt-get install gdebi   //deb软件包安装程序
+
+apt-get install remmina //GTK+远程桌面客户端
+
+apt-get install galculator  //计算器
+
+apt-get install Mousepad    // Xfce 桌面环境下的一个快速的文本编辑器 。
+
 ```
 
-注销，重新登录之后才可以使用。
+ 
 
--------
-3. 安装Flash插件：
-```
-apt-get install flashplugin-nonfree
+## 4.安装输入法，搜狗
 
-update-flashplugin-nonfree --install
-```
+打开搜狗输入法Linux版的官网http://pinyin.sogou.com/linux/?r=pinyin，并下载你需要的版本，
 
-4. 安装原版Firefox方法：
+下载完成后进入下载目录，在终端执行安装，输入命令
+
+`dpkg -i sogoupinyin_2.0.0.0068_i386 ` //你的安装文件名
+
+也可以用GDebi软件打开进行安装，安装过程会出现依赖关系问题，所以安装完成后在执行以下命令
+
+`apt-get install -f `
+修复一下依赖关系就可以了
+
+
+ 
+
+## 5.火狐浏览器是英文的解决方法
+
+打开火狐附加组件网址
+
+`https://addons.mozilla.org/zh-cn/firefox/addon/chinese-simplified-zh-cn-la/versions/`
+
+添加你火狐浏览器所对应的版本 添加----install安装
+
+重启浏览器即可解决
+
+
+
+## 6. 安装原版Firefox方法：
 
 ```
 iceweasel 于更新到26.0了。
@@ -73,26 +122,9 @@ apt-get update
 apt-get firefox-mozilla-build
 ```
 
-5. 安装最新 iceweasel，并汉化
-```
-deb http://mozilla.debian.net/ wheezy-backports iceweasel-release                                          #添加这个软件源
-
-apt-get install pkg-mozilla-archive-keyring                                                                             #导入PGP KEY
-
-gpg --check-sigs --fingerprint --keyring /etc/apt/trusted.gpg.d/pkg-mozilla-archive-keyring.gpg --keyring /usr/share/keyrings/debian-keyring.gpg pkg-mozilla-maintainers                                               #新建钥匙环
-
-apt-get -y update && apt-get install -t wheezy-backports iceweasel && apt-get install iceweasel-l10n-zh-cn
-```
-
-6. kali-linux安装flash player：
-```
-        apt-get install flashplugin-nonfree
-
-        update-flashplugin-nonfree --install
-```
 
 
-7. kali-linux安装qq2012
+1. kali-linux安装qq2012
 
 ```
 root权限：

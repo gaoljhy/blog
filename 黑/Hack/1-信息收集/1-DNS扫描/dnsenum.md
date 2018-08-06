@@ -7,10 +7,16 @@
 
 
 ## 参数
+```
   --dnsserver     <server>
             Use this DNS server for A, NS and MX queries.
 
-  --enum        Shortcut option equivalent to --threads 5 -s 15 -w.
+  --enum        Shortcut option equivalent to 
+  
+  --threads 5 
+  -s 15 
+  -w.
+```
 
 
 使用 示例
