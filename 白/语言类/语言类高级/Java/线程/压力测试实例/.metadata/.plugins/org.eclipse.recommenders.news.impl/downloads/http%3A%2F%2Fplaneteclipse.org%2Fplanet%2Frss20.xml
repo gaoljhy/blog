@@ -8,6 +8,24 @@
 	<description>Planet Eclipse - http://planeteclipse.org/planet/</description>
 
 <item>
+	<title>Maximilian and Jonas: Modeling Symposium @ EclipseCon Europe 2018</title>
+	<guid isPermaLink="false">https://eclipsesource.com/?p=39797</guid>
+	<link>https://eclipsesource.com/blogs/2018/08/08/modeling-symposium-eclipsecon-europe-2018/</link>
+	<description>&lt;p&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;We are happy to announce that Ed, Philip and Jonas are organizing the Modeling Symposium for the &lt;a href=&quot;https://www.eclipsecon.org/europe2018&quot;&gt;EclipseCon Europe 2018 in Ludwigsburg&lt;/a&gt;. The symposium aims to provide a forum for community members to present a brief overview of their work. We offer 10 minute lightning slots (including set-up and questions) to facilitate a broad range of speakers. The primary goal is to introduce interesting, new technological features. This targets mainly modeling projects which are otherwise not represented at the conference.&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;If you are interested in giving a talk, please send a short description (a few sentences) to munich@eclipsesource.com. Depending on the number, we might have to select among the submissions. &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Deadline for submission: Wednesday, September 5th, 2018&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Acceptance/ Decline notification: Monday, September 10th, 2018&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Please adhere to the following guidelines:&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li style=&quot;font-weight: 400;&quot;&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Please provide sufficient context. Talks should start with a concise overview of what the presenter plans to demonstrate, or what a certain framework offers.  Even more important, explain how and why this is relevant.&lt;/span&gt;&lt;/li&gt;
+&lt;li style=&quot;font-weight: 400;&quot;&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Do not bore us! Get to the point quickly.  You do not have to use all your allocation. An interesting 3 minute talk will have a bigger impact than a boring 10 minute talk. We encourage you to plan for a 5 minute talk, leaving room for 5 minutes of discussion.&lt;/span&gt;&lt;/li&gt;
+&lt;li style=&quot;font-weight: 400;&quot;&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Keep it short and sweet, focus on the most important aspects. A conference offers the major advantage of getting in contact with people who are interested in your work. So consider the talk more as a teaser to prompt follow-up conversations than a forum to demonstrate or discuss technical details in depth.&lt;/span&gt;&lt;/li&gt;
+&lt;li style=&quot;font-weight: 400;&quot;&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;A demo is worth a thousand slides. We prefer to see how your stuff works rather than be told about how it works with illustrative slides.  Please restrict the slides to summarize your introduction or conclusion.&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Looking forward to your submissions!&lt;/span&gt;&lt;/p&gt;</description>
+	<pubDate>Wed, 08 Aug 2018 11:45:27 +0000</pubDate>
+</item>
+<item>
 	<title>Tom Schindl: Supporting OpenJFX 11 from JDK11 onwards in e(fx)clipse</title>
 	<guid isPermaLink="false">http://tomsondev.bestsolution.at/?p=5116</guid>
 	<link>https://tomsondev.bestsolution.at/2018/08/04/supporting-openjfx-11-from-jdk11-onwards-in-efxclipse/</link>
@@ -96,13 +114,6 @@
 	<link>http://feedproxy.google.com/~r/eclipse/fnews/~3/4kRdPZP_inc/20180731-jakartaEE_committee_election.php</link>
 	<description>The results are in for Participant and Committer Member elections for representatives to the Jakarta EE Working Group!&lt;img alt=&quot;&quot; height=&quot;1&quot; src=&quot;http://feeds.feedburner.com/~r/eclipse/fnews/~4/4kRdPZP_inc&quot; width=&quot;1&quot; /&gt;</description>
 	<pubDate>Tue, 31 Jul 2018 14:10:00 +0000</pubDate>
-</item>
-<item>
-	<title>InfoQ Eclipse feed: Eclipse Foundation Releases Eclipse Photon IDE</title>
-	<guid isPermaLink="true">http://www.infoq.com/news/2018/07/eclipse-photon?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=Eclipse</guid>
-	<link>http://www.infoq.com/news/2018/07/eclipse-photon?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=Eclipse</link>
-	<description>&lt;img src=&quot;http://www.infoq.com/styles/i/logo_bigger.jpg&quot; /&gt;&lt;p&gt;The Eclipse Foundation has released the latest version of the Eclipse IDE. Eclipse Photon brings support for both Java 10 and Java EE 8, improvements for PHP development tools, Dark theme improvements, and more.&lt;/p&gt; &lt;i&gt;By Diogo Carleto&lt;/i&gt;</description>
-	<pubDate>Fri, 27 Jul 2018 17:00:00 +0000</pubDate>
 </item>
 <item>
 	<title>Eclipse Announcements: Eclipse Newsletter | Embedded Development</title>

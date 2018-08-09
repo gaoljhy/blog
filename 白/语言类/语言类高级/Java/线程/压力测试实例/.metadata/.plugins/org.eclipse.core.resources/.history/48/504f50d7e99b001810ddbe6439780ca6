@@ -1,0 +1,14 @@
+package temp;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import def.push.*;
+
+public class Temp{
+	public static void main(String[] args) {
+		ExecutorService executor = Executors.newCachedThreadPool();
+		ThreadAll all = new ThreadAll();
+	}
+
+}
+

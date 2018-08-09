@@ -1,0 +1,11 @@
+package temp;
+import def.push.*;
+
+public class Temp{
+	public static void main(String[] args) {
+		HttpDo de = new HttpDo();
+		System.out.println(("http://www.baidu.com"));
+	}
+
+}
+

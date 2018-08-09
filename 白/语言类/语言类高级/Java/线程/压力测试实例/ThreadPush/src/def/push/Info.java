@@ -89,7 +89,7 @@ public class Info {
      * @return the method
      */
     public String getMethod() {
-        return method;
+        return this.method;
     }
 
     /**

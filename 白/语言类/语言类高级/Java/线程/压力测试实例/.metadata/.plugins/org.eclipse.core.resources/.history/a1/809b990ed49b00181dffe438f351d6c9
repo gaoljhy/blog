@@ -1,0 +1,12 @@
+package def.push;
+
+class ThreadAll im {
+	// 重写 call
+	@Override
+	public Integer call() throws Exception {
+		if (this.do1.doRun() == this.info.getStatusCode()) {
+			return 1;
+		} 
+		return 0 ;
+	}
+}

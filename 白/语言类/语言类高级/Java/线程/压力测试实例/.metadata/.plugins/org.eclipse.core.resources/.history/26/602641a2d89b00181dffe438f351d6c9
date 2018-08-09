@@ -1,0 +1,11 @@
+package temp;
+import def.push.*;
+
+public class Temp{
+	public static void main(String[] args) {
+	
+		System.out.println(HttpRequest.sendGet("www.baidu.com"));
+	}
+
+}
+

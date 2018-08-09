@@ -1,9 +1,9 @@
 package def.push;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.FutureTask;
-import java.util.function.ToDoubleFunction;
 
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.FutureTask;
 
 /**
  * data:18.8.7 2:40 auto : lemon features : 指定 线程数 tnum ，请求 url , 传递方式 method
@@ -12,74 +12,52 @@ import java.util.function.ToDoubleFunction;
  */
 
 public class Demon {
-    public static void main(String[] args) {
-        Double num = 0.0;
-        AllMake allMake = new AllMake();
-        num += allMake.doAll();
-        System.out.println(num);
-    }
-}
-/**
- * AllMake
- * 
- */
-class AllMake implements Callable<Integer>{
-    public HttpDo do1 ;
-    public Info info ;
-    @SuppressWarnings("finally")
-	public Integer doAll(){
-        //创建 数据集
-        this.info = new Info();
-        //获取用户输入
-        Gui gu = new Gui();
-        info.setUrl(gu.getUrl());
-        info.setTnum(gu.getTnum());
-        info.setMethod(gu.getMethod());
-        if(info.getMethod()=="post"){
-            info.setCookie(gu.getCookie());
-            info.setUserAgent(gu.getUserAgent());
-            info.setRefere(gu.getUserAgent());
-            info.setPostparamter(gu.getPostParamater());
-        }
-        // 创建 http 请求 
-        this.do1 = new HttpDo(info);
+	public static Info info = new Info();
 
-        // 创建 Callable 实例
-        AllMake allMake = new AllMake() ;
-        FutureTask<Integer> fTask = new FutureTask<Integer>(allMake);
-        
-        // 创建线程
-        for(int i = 0 ;i < info.getTnum();i++ ){
-            new Thread(fTask , ""+i).start(); ;
-        }
+	public static void main(String[] args) {
+		// 获取用户输入
+		System.out.println("pressure test\n" + 
+				"by GRj");
+		Gui gu = new Gui();
+		info.setUrl(gu.getUrl());
+		info.setTnum(gu.getTnum());
+		info.setMethod(gu.getMethod());
+		if (info.getMethod().equals( "post")) {
+			info.setCookie(gu.getCookie());
+			info.setUserAgent(gu.getUserAgent());
+			info.setRefere(gu.getRefere());
+			info.setPostparamter(gu.getPostParamater());
+		}
+		// 创建 http 请求
+		HttpDo do1 = new HttpDo(info);
 
-        // 得到返回值
-        try  
-        {  
-            System.out.println("线程的返回值："+fTask.get());  
-            return fTask.get();
-        } catch (InterruptedException e)  
-        {  
-            e.printStackTrace();  
-        } catch (ExecutionException e)  
-        {  
-            e.printStackTrace();  
-        }
-        finally{
-            return 0 ;
-        } 
-        
-    }
+		//do1.doRun();
+		// 创建线程池
+		ExecutorService executor = Executors.newCachedThreadPool();
 
-    // 重写 call
-    @Override
-    public Integer call() throws Exception {
-        if(this.do1.doRun() == this.info.getStatusCode()){
-            return 1 ;
-        }else{
-            return 0;
-        }
-    }
-    
-    
+		// 创建线程对象
+		ThreadAll all = new ThreadAll(do1);
+
+		int allnum = 0, tnum = info.getTnum();
+		// 得到返回值
+		try {
+			for (int i = 0; i < tnum; i++) {
+				FutureTask<String> te = new FutureTask<String>(all);
+				executor.submit(te);
+				// System.out.println(te.get());
+				if (te.get().equals( info.getStatusCode())) {
+					allnum += 1;
+				}
+			}
+			executor.shutdown();
+
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
+
+		System.out.println("最终结果: \n共运行: " + tnum + "个请求\n" + "得到承载数为: " + allnum);
+	}
+
 }

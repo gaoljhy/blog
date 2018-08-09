@@ -1,0 +1,36 @@
+package def.push;
+
+import java.util.concurrent.Callable;
+
+class ThreadAll implements Callable {
+	public HttpDo do1;
+	public Info info;
+
+	@SuppressWarnings("finally")
+	public integer init() {
+		// 创建 数据集
+		this.info = new Info();
+		// 获取用户输入
+		Gui gu = new Gui();
+		info.setUrl(gu.getUrl());
+		info.setTnum(gu.getTnum());
+		info.setMethod(gu.getMethod());
+		if (info.getMethod() == "post") {
+			info.setCookie(gu.getCookie());
+			info.setUserAgent(gu.getUserAgent());
+			info.setRefere(gu.getUserAgent());
+			info.setPostparamter(gu.getPostParamater());
+		}
+		// 创建 http 请求
+		this.do1 = new HttpDo(info);
+	}
+
+	// 重写 call
+	@Override
+	public Integer call() throws Exception {
+		if (this.do1.doRun() == this.info.getStatusCode()) {
+			return 1;
+		} 
+		return 0 ;
+	}
+}
