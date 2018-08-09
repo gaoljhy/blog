@@ -1,0 +1,83 @@
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
+import java.util.function.ToDoubleFunction;
+
+
+/**
+ * data:18.8.7 2:40 auto : lemon features : 指定 线程数 tnum ，请求 url , 传递方式 method
+ * ，返回响应状态码 statusCode method == get , 直接开循环多次访问，若返回 404 ，输出一次 ，errorTwice ++
+ * method == post , 需要指定 Headers{} , Cookie,User-Agent,Refere ，postParamter
+ */
+
+public class Demon {
+    public static void main(String[] args) {
+        Double num = 0.0;
+        AllMake allMake = new AllMake();
+        num += allMake.doAll();
+        System.out.println(num);
+    }
+}
+/**
+ * AllMake
+ * 
+ */
+class AllMake implements Callable<Integer>{
+    public HttpDo do1 ;
+    public Info info ;
+    public Integer doAll(){
+        //创建 数据集
+        this.info = new Info();
+        //获取用户输入
+        Gui gu = new Gui();
+        info.setUrl(gu.getUrl());
+        info.setTnum(gu.getTnum());
+        info.setMethod(gu.getMethod());
+        if(info.getMethod()=="post"){
+            info.setCookie(gu.getCookie());
+            info.setUserAgent(gu.getUserAgent());
+            info.setRefere(gu.getUserAgent());
+            info.setPostparamter(gu.getPostParamater());
+        }
+        // 创建 http 请求 
+        this.do1 = new HttpDo(info);
+
+        // 创建 Callable 实例
+        AllMake allMake = new AllMake() ;
+        FutureTask<Integer> fTask = new FutureTask<Integer>(allMake);
+        
+        // 创建线程
+        for(int i = 0 ;i < info.getTnum();i++ ){
+            new Thread(fTask , ""+i).start(); ;
+        }
+
+        // 得到返回值
+        try  
+        {  
+            System.out.println("线程的返回值："+fTask.get();  
+            return fTask.get();
+        } catch (InterruptedException e)  
+        {  
+            e.printStackTrace();  
+        } catch (ExecutionException e)  
+        {  
+            e.printStackTrace();  
+        }
+        finally{
+            return 0 ;
+        } 
+        
+    }
+
+    // 重写 call
+    @Override
+    public Integer call() throws Exception {
+        if(this.do1.doRun() == this.info.getStatusCode()){
+            return 1 ;
+        }else{
+            return 0;
+        }
+    }
+    
+    
+}
