@@ -1,0 +1,19 @@
+https://www.52pojie.cn/thread-781733-1-1.html
+在 `Pycharm`安装目录的`\bin`目录下找到 
+`pycharm.exe.vmoptions` 和 `pycharm64.exe.vmoptions` ，（windows下）
+或 `pycharm.vmoptions` ,(mac下)
+
+
+以文本格式打开并同时在两个文件最后追加     工具包路径(需将工具包移到当前目录)
+`-javaagent:JetbrainsCrack-3.1-release-enc.jar`，(windows)移到当前目录
+`-javaagent:JetbrainsCrack-3.1-release-enc.jar`,(mac)移到当前目录
+然后保存
+
+
+
+然后打开Pycharm输入激活码
+```
+{"licenseId":"K03CHKJCFT","licenseeName":"MaxSecret","assigneeName":"Max","assigneeEmail":"max@chamd5.org","licenseRestriction":"For educational use only","checkConcurrentUse":false,"products":[{"code":"II","paidUpTo":"2099-01-1"},{"code":"RS0","paidUpTo":"2099-01-1"},{"code":"WS","paidUpTo":"2099-01-1"},{"code":"RD","paidUpTo":"2099-01-1"},{"code":"RC","paidUpTo":"2099-01-1"},{"code":"DC","paidUpTo":"2099-01-1"},{"code":"DB","paidUpTo":"2099-01-1"},{"code":"RM","paidUpTo":"2099-01-1"},{"code":"DM","paidUpTo":"2099-01-1"},{"code":"AC","paidUpTo":"2099-01-1"},{"code":"DPN","paidUpTo":"2099-01-1"},{"code":"GO","paidUpTo":"2099-01-1"},{"code":"PS","paidUpTo":"2099-01-1"},{"code":"CL","paidUpTo":"2099-01-1"},{"code":"PC","paidUpTo":"2099-01-1"},{"code":"RSU","paidUpTo":"2099-01-1"}],"hash":"8825014/0","gracePeriodDays":0,"autoProlongated":false,"isAutoProlongated":false}
+```
+
+成功！！！！

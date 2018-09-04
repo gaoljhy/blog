@@ -139,6 +139,7 @@ use_proxy = on　　//开启代理
 
 
 10. `FTP`下载
+> `ftp`的`url`需要在文件前加`*`,否则会下载`html`文件
 
 >匿名FTP
 
@@ -149,7 +150,7 @@ use_proxy = on　　//开启代理
 `wget --ftp-user=USERNAME --ftp-password=PASSWORD DOWNLOAD-URL`
  
 
-11. 针对提示没有认证不允许下载
+1.  针对提示没有认证不允许下载
 
     `wget --no-check-certificate DOWNLOAD-URL`
 

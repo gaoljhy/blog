@@ -1,6 +1,6 @@
 ## `Flask`是一个使用 `Python` 编写的轻量级 `Web` 应用框架。
 
-其 `WSGI` 工具箱采用 `Werkzeug` ，模板引擎则使用 `Jinja2`。
+其 `WSGI` (在 Web 应用和多种服务器之间的标准 Python 接口) 工具箱采用 `Werkzeug` ，模板引擎则使用 `Jinja2`。
 > 很多功能的实现都参考了`django`框架。
 
 
