@@ -57,6 +57,9 @@ exploit -j -z
  
 执行完之后在Windows下执行`shell.exe`，然后等结果
 
+
+
+
 -----
  
 在这里既然使用到了在Windows下执行应用程序，我们就大概盘点一下在Windows执行应用程序的几种方式：
