@@ -38,5 +38,9 @@ Centos
     2. `ctrl+x`重新引导
     3. 输入`mount -o remount,rw / ` 挂载硬盘，具有读写权限
     4. 然后输入`passwd`设置新密码，如下图
-    5. 输入 `touch  /.autorelabel`  更新系统信息
+    5. 输入 `touch  /.autorelabel`  更新系统信息(`根目录下文件`)
 
+-----
+`logout`
+俩次 `exit `
+`exit`
