@@ -8,11 +8,6 @@
 
 ```
 pip3 install virtualenv 
-
-&&
-
-pip3 install -i http://pypi.douban.com/simple/ --trusted-host pypi.douban.com virtualenv
-
 ```
 
 > 检测是否安装成功
