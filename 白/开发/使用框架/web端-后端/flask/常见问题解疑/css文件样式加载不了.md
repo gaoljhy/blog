@@ -10,3 +10,12 @@
 
 2. 没清除缓存记录
     导致不能缓存东西 
+
+3. 多应用中返回404
+    blog = Blueprint("blogd",__name__)
+    url_for("stati",filename="") 
+    未指定 `blogd`
+    应为  
+    `blogd.static`
+    蓝图名称(不是蓝图对象) ， 加 static or template
+
