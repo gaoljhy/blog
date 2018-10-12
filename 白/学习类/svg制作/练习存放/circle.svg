@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000">
+    <circle 
+    r = '100'
+    style="fill:red;"
+    />
+    <circle 
+    r = '100'
+    cx = "100" cy = "200"
+    style="
+    fill:blue;
+    <!-- fill-optaity:0.7; -->
+    <!-- stroke-width=10;stroke:black; -->
+    
+    "
+    />
+</svg>
