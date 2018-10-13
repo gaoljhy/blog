@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3c.org/2000/svg"
+width=1000 heigh=1000 >
+
+<line x1="100" y1="10" x2="10" y2="30" stroke="red" stroke-width="7"/>
+
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+width="300" height="200">
+    <rect 
+    width="300" height="200" 
+    fill="red"
+    />
+    <polygon 
+    points="50,5,20,90 95,30 ,5,30, 80,90"
+    fill="yellow"
+    />
+</svg>
