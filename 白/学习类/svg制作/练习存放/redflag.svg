@@ -1,11 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-width="300" height="200">
-    <rect 
-    width="300" height="200" 
-    fill="red"
-    />
-    <polygon 
-    points="50,5,20,90 95,30 ,5,30, 80,90"
-    fill="yellow"
-    />
+<svg xmlns="http://www.w3c.org/2000/svg"
+width=200 height=200>
+<rect width="200" height="200"
+fill=black
+/>
+<ellipse 
+cx=68 cy=100 
+rx=19 ry=40
+fill=red
+stroke=blue
+stroke-width=20
+/>
+<ellipse 
+cx=101 cy=100 
+rx=19 ry=40
+fill=red
+stroke=blue
+stroke-width=20
+/>
+<ellipse 
+cx=85 cy=115 
+rx=2 ry=40
+fill=red
+stroke=blue
+stroke-width=20
+opacity=0.4
+/>
 </svg>
