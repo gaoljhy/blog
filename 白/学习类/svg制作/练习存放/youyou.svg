@@ -18,11 +18,16 @@ stroke=blue
 stroke-width=20
 />
 <ellipse 
-cx=85 cy=115 
+cx=85 cy=80 
 rx=2 ry=40
 fill=red
 stroke=blue
-stroke-width=20
+stroke-width=4
+opacity=0.4
+/>
+<line 
+x1="85" x2="85" y1="58" y2="0" 
+stroke=rgb(255,255,255)
 opacity=0.4
 />
 </svg>
