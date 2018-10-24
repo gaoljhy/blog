@@ -56,5 +56,8 @@
     launchctl help
     ```
 
- 
+ 本质上是 加载`.plist`文件到指定目录
+ 并管理文件到 进程中
 
+ 但是区分 `root` 用户 和`system`
+    区分 目录 是系统目录还是 root目录
