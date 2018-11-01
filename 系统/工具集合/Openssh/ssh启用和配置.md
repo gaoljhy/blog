@@ -43,18 +43,19 @@
 
 2. 对应操作(默认忽略大小写)<br>
 
-   |设置项|所设值| 注解|
-   |:-----:|:-----:|:-----|
-   |`Host`|　`*`|　`Host`只对 能够匹配后面字串的计算机有效。`*`表示所有的计算机。　
-   |`Port`|`　22　 `|`Port`设置`sshd`监听的端口号
-   |`PermitRootLogin`|`yes`|设置是否允许以`root`用户登录
-   |`PasswordAuthentication`|　yes|设置密码认证
-    |`ForwardAgent`|`　no　 `|转发代理设置
-    |`ForwardX11`　|`no`|　 `ForwardX11`设置`X11`连接是否被自动重定向到安全的通道和显示集（DISPLAY　set）。　
+   | 设置项                   | 所设值    | 注解                                                                            |
+   | :----------------------: | :-------: | :------------------------------------------------------------------------------ |
+   | `Host`                   | `*`       | `Host`只对 能够匹配后面字串的计算机有效。`*`表示所有的计算机。                  |
+   | `Port`                   | `　22　 ` | `Port`设置`sshd`监听的端口号                                                    |
+   | `PermitRootLogin`        | `yes`     | 设置是否允许以`root`用户登录                                                    |
+   | `PasswordAuthentication` | yes       | 设置密码认证                                                                    |
+   | `ForwardAgent`           | `　no　 ` | 转发代理设置                                                                    |
+   | `ForwardX11`             | `no`      | `ForwardX11`设置`X11`连接是否被自动重定向到安全的通道和显示集（DISPLAY　set）。 |
    
 
 ### 大型 `ssh` 服务器其他常用安全设置
-``` 
+
+``` bash
 # HostKey 设置包含计算机用户私人密匙的文件。　
    HostKey 　/etc/ssh/ssh_host_key　`
 

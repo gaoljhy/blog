@@ -14,8 +14,8 @@ SSH分客户端`openssh-client`和`openssh-server`
 
 2. 如果没有则可以这样启动：`sudo /etc/init.d/ssh start` 或者 `service ssh start`
 
-
 -----------------------------------------------
+
 `ssh-server`配置文件位于`/etc/ssh/sshd_config`
 > 在这里可以定义SSH的服务端口，默认端口是22，可以自己定义成其他端口号
 
