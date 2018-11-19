@@ -32,7 +32,6 @@ Centos
         3. `touch / .autorelabel`
 
 
-
 方法二
     1. 在`UTF-8`后面输入`init=/bin/sh` 
     2. `ctrl+x`重新引导
