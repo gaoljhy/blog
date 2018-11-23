@@ -19,7 +19,9 @@ pip 升级
 3. 升级一个包：
 
     `pip install --upgrade requests`  // mac,linux,unix 在命令前加 sudo -H
+
     > 指定版本时 使用 `-v 版本号
+ `pip install -v pycrypto==2.3`
 `
 4. 升级所有可升级的包：
 
