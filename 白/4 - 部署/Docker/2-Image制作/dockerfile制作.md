@@ -6,6 +6,14 @@
 2. 指令 大写
 3. 参数
 
+## 创建指令
+
+一般制指定
+  `docker build  -t name:tag -f <dockerfile> <PATH>`
+
+ 例如：
+  `docker build -t nginx:0.1 -f temp/file .`
+
 ## 查看一个Image的dockerfile
 
  `docker history`
@@ -27,7 +35,7 @@
 4. `CMD`
    1. 等同于`RUN`采用`exec` 模式 - `RUN ["executable","param1"]`
       > `executable` 为 各种不同的`shell` ，如`/bin/bash`,`/bin/python`等
-    2. `dameon off/on` 作用为设定是否前台使用
+    1. `dameon off/on` 作用为设定是否前台使用
 5. `EXPOSE <port>[<port>...]`
    1. 指定运行该镜像的容器所需要使用的端口
    2. 该端口并不会默认打开，仍需要`docker run -p`开启端口映射
