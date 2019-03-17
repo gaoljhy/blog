@@ -36,9 +36,9 @@
 
 接下来将要制作的Linux iso文件写到U盘里
 
-`sudo dd if=/Users/mr.le/Downloads/CentOS-7-x86_64-DVD-1511.iso of=/dev/disk2 bs=1m`
+`sudo dd if=/Users/mr.le/Downloads/CentOS-7-x86_64-DVD-1511.iso of=/dev/disk2 bs=50m`
 
-`bs` : 表示写入块大小，可以设置为`2M`，但不要太大。
+`bs` : 一个时间点读写最大峰值 
 
 ## 完成
 
