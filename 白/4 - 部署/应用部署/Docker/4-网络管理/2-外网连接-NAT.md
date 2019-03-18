@@ -23,4 +23,3 @@
 可以在物理机使用 `iptables`
 
 `sudo iptables -I DOCKER -s <banIp> -d <destIp> -p <TCP/UDP> --dport <destPort> -j <DROP/ACCEPT/>`
-
