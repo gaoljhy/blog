@@ -6,7 +6,7 @@ MAINTAINER "lemon <lemon@gamil.com>"
 
 USER root
 
-RUN "/bin/python","app.py","-h","install"
+RUN python app.py -h install
 
 EXPOSE 80
 

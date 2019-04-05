@@ -65,7 +65,7 @@
 
 ## 使用 dockerfile 创建
 
- `docker build -f file`
+ `docker build -f file 存放的PATH`
 
 ## 构建的缓存
   
