@@ -22,8 +22,8 @@ RUN apt-get -y install openssh-server
 
 RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
 # RUN echo RSAAuthentication yes >> /etc/ssh/sshd_config
-RUN echo PubkeyAuthentication yes >> /etc/ssh/sshd_config
-RUN echo AuthorizedKeysFile .ssh/authorized_keys >> /etc/ssh/sshd_config
+#RUN echo PubkeyAuthentication yes >> /etc/ssh/sshd_config
+#RUN echo AuthorizedKeysFile .ssh/authorized_keys >> /etc/ssh/sshd_config
 RUN service ssh restart
 
 ADD ./all.sh /
