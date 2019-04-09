@@ -4,7 +4,11 @@ FROM python:latest
 
 MAINTAINER lemon<gjlove666@hotmail.com>
 
+# 时区设置
+ENV TZ=Asia/Shanghai
+
 USER root
+
 
 RUN echo root:ubuntu | chpasswd -m
 
@@ -25,6 +29,7 @@ RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh
 #RUN echo PubkeyAuthentication yes >> /etc/ssh/sshd_config
 #RUN echo AuthorizedKeysFile .ssh/authorized_keys >> /etc/ssh/sshd_config
 RUN service ssh restart
+
 
 ADD ./all.sh /
 # 在container 中挂载的目录 ，创建容器时，可以进行指定本地dir
