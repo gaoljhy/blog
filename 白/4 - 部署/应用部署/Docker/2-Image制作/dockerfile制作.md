@@ -35,7 +35,7 @@
 4. `CMD`
    1. 等同于`RUN`采用`exec` 模式 - `RUN ["executable","param1"]`
       > `executable` 为 各种不同的`shell` ，如`/bin/bash`,`/bin/python`等
-    1. `dameon off/on` 作用为设定是否前台使用
+   2. `dameon off/on` 作用为设定是否前台使用
 5. `EXPOSE <port>[<port>...]`
    1. 指定运行该镜像的容器所需要使用的端口
    2. 该端口并不会默认打开，仍需要`docker run -p`开启端口映射
@@ -71,3 +71,10 @@
   
   `docker` 会默认开启缓存（创建同一类container时，使用快速）
   `docker build --no--cache` 关闭缓存
+
+## 注意
+
+> ADD 和 COPY 是复制源文件夹下所有有内容到 目标内，不会复制源文件夹
+> 目标文件如果为`~`，是不会定位到家目录，会在根目录下创建一个`~`目录，所以最好选用的是绝对路径
+
+> 每天一条 RUN 命令都以根目录为初始路径，或者之前设置好`WORKDIR`
