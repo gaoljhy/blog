@@ -4,7 +4,7 @@ import urllib
 import urllib2
 
 url = 'http://login.imau.edu.cn:801/srun_portal_phone.php?ac_id=1&url=http://www.itellyou.cn/'
-data = "action=login&ac_id=1&user_ip=&nas_ip=&user_mac=&username=2016&password=zjx802399"
+data = "action=login&ac_id=1&user_ip=&nas_ip=&user_mac=&username=20&password=04HYY"
 headers = {'Host': 'login.imau.edu.cn:801',
            'Cache-Control': 'max-age=0',
            'Origin':'http://login.imau.edu.cn:801',

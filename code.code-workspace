@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "/Users/mr.lemon/Downloads/ReAM-master"
 		}
 	],
 	"settings": {}
