@@ -1,0 +1,1 @@
+https://docs.microsoft.com/en-us/windows/desktop/WinSock/getting-started-with-winsock
