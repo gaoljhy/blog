@@ -5,7 +5,7 @@ try:
                 if alp == "":
                     break
                 alp=alp.replace('\n',"")
-                wp.write("["+alp+"]("+alp+")\n")
+                wp.write("["+alp+"]("+alp+")\n\n")
                 # wp.flush()
 except EOFerror:
     print("get all")
