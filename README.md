@@ -8,13 +8,13 @@
 
 [目录](record.md)
 
-├── LICENSE
-├── README.md
-├── record.md
-├── Recording
-├── Teach-A
-├── 记录类
-├── 比赛类
-├── 系统
-├── 黑
-└── 白
+    ├── LICENSE
+    ├── README.md
+    ├── record.md
+    ├── Recording
+    ├── Teach-A
+    ├── 记录类
+    ├── 比赛类
+    ├── 系统
+    ├── 黑
+    └── 白
