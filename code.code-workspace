@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "/Users/mr.lemon/Downloads/CVE-2016-5195"
 		}
 	],
 	"settings": {}
