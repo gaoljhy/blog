@@ -1,9 +1,6 @@
 # XML
 
 ```java
-package Presenter;
-
-
 import com.sun.istack.internal.NotNull;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -19,7 +16,7 @@ import java.util.Map;
 
 
 
-public class XmlFile implements XmlRead {
+public class XmlFile {
 
     public Map read(String path) {
         Map result = new HashMap();

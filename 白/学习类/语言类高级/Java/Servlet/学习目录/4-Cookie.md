@@ -1,4 +1,5 @@
-Servlet Cookie 处理
+# Servlet Cookie 处理
+
 Cookie 是存储在客户端计算机上的文本文件，并保留了各种跟踪信息。Java Servlet 显然支持 HTTP Cookie。
 
 识别返回用户包括三个步骤：
@@ -37,7 +38,8 @@ Accept-Charset: iso-8859-1,*,utf-8
 Cookie: name=xyz
 Servlet 就能够通过请求方法 request.getCookies() 访问 Cookie，该方法将返回一个 Cookie 对象的数组。
 
-Servlet Cookie 方法
+## Servlet Cookie 方法
+
 以下是在 Servlet 中操作 Cookie 时可使用的有用的方法列表。
 
 序号	方法 & 描述
@@ -66,7 +68,8 @@ Servlet Cookie 方法
 12	public String getComment()
 获取 cookie 的注释，如果 cookie 没有注释则返回 null。
 
-通过 Servlet 设置 Cookie
+## 通过 Servlet 设置 Cookie
+
 通过 Servlet 设置 Cookie 包括三个步骤：
 
 (1) 创建一个 Cookie 对象：您可以调用带有 cookie 名称和 cookie 值的 Cookie 构造函数，cookie 名称和 cookie 值都是字符串。
@@ -205,6 +208,7 @@ public class HelloForm extends HttpServlet {
 实例
 让我们读取上面的实例中设置的 Cookie
 
+```java
 package com.runoob.test;
 
 import java.io.IOException;
@@ -283,6 +287,8 @@ public class ReadCookies extends HttpServlet {
     }
 
 }
+```
+
 编译上面的 Servlet ReadCookies，并在 web.xml 文件中创建适当的条目。尝试运行 http://localhost:8080/TomcatTest/ReadCookies，将显示如下结果：
 
 
