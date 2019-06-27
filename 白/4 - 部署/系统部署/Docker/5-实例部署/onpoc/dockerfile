@@ -1,0 +1,43 @@
+# python-ssh
+
+FROM python:latest
+
+MAINTAINER lemon<gjlove666@hotmail.com>
+
+# 时区设置
+ENV TZ=Asia/Shanghai
+
+USER root
+
+
+RUN echo root:ubuntu | chpasswd -m
+
+RUN echo deb http://mirrors.aliyun.com/debian/ stretch main non-free contrib > /etc/apt/sources.list
+RUN echo deb-src http://mirrors.aliyun.com/debian/ stretch main non-free contrib >> /etc/apt/sources.list
+RUN echo deb http://mirrors.aliyun.com/debian-security stretch/updates main >> /etc/apt/sources.list
+RUN echo deb-src http://mirrors.aliyun.com/debian-security stretch/updates main >> /etc/apt/sources.list
+RUN echo deb http://mirrors.aliyun.com/debian/ stretch-updates main non-free contrib >> /etc/apt/sources.list
+RUN echo deb-src http://mirrors.aliyun.com/debian/ stretch-updates main non-free contrib >> /etc/apt/sources.list
+RUN echo deb http://mirrors.aliyun.com/debian/ stretch-backports main non-free contrib >> /etc/apt/sources.list
+RUN echo deb-src http://mirrors.aliyun.com/debian/ stretch-backports main non-free contrib >> /etc/apt/sources.list
+
+RUN apt-get update
+RUN pip install --upgrade pip
+
+ADD ./onlinetools /root/
+RUN pip install -r /root/requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+CMD python /root/main.py
+# 在container 中挂载的目录 ，创建容器时，可以进行指定本地dir
+VOLUME [ "/work" ]
+EXPOSE 8000
+
+
+# 用户进入目录
+WORKDIR /root
+
+# build指令
+# docker build -t adminhub/onlinepoc:latest -f dockerfile  ./
+
+# 创建指令
+# docker create -it --name opc -p 8000:8000 -v /Users/mr.lemon/docker-workdir/:/work:rw adminhub/onlinepoc:latest
