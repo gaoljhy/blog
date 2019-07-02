@@ -1,0 +1,184 @@
+zabbix监控
+
+	作用：实现公司内部IT基础设施(服务器、网络设备)的监控
+
+	监控软件：
+		cacti, nagios, zabbix, openflacon, promthemus 
+
+	作用： 
+		1、获取数据 
+		2、报警 
+
+
+zabbix简介 
+
+	https://www.zabbix.com/
+
+	Zabbix 是一个企业级的分布式开源监控方案。
+
+	Zabbix是一款能够监控各种网络参数以及服务器健康性和完整性的软件。Zabbix使用灵活的通知机制，允许用户为几乎任何事件配置基于邮件的告警。这样可以快速反馈服务器的问题。
+
+
+
+zabbix获取数据的方式
+
+	1) zabbix agent   
+	
+		适用于主机(windows, Linux, Unix, Mac)
+		
+		zabbix agent工作方式：
+		
+			主动监控
+			被动监控
+			
+			
+	
+	2) snmp协议  	简单网络管理协议  
+	
+		适用于网络设备 
+		版本：
+			v1
+			v2		【推荐】
+			v3 
+	
+	3) IPMI协议 
+	
+		适用于硬件设备(传感器)
+		
+		
+	4) JMX
+	
+		适用于Java应用程序, Tomcat, 大数据开发
+
+
+
+安装部署zabbix server 
+
+	192.168.122.100 zabbix-server.linux.com 
+	
+	
+一、配置时间同步 
+
+hostnamectl set-hostname zabbix-server.linux.com
+
+ntpdate 10.100.100.252
+> 1 Jul 15:43:03 ntpdate[10652]: adjust time server 10.100.100.252 offset -0.026844 sec
+
+date
+> 2019年 07月 01日 星期一 15:43:06 CST
+
+## 附加
+
+crontab -e
+*/30 * * * *  /usr/sbin/ntpdate 10.100.100.252
+
+
+二、安装lamp平台 
+
+yum install -y httpd php php-gd gd mariadb-server php-mysql 
+
+systemctl start httpd mariadb
+systemctl enable httpd mariadb
+
+netstat -antp | grep :80
+> tcp6       0      0 :::80                   :::*                    LISTEN      10756/httpd         
+netstat -antp | grep :3306
+> tcp        0      0 0.0.0.0:3306            0.0.0.0:*               LISTEN      11003/mysqld        
+
+
+
+测试lamp是否正常 
+
+echo "
+<?php
+   phpinfo();
+?>" > /var/www/html/test.php
+
+
+三、创建数据库，并建立授权用户
+
+mysql -uroot
+
+MariaDB [(none)]> create database zabbix charset utf8;
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [(none)]> grant all on zabbix.* to 'admin'@'localhost' identified by 'redhat';
+
+MariaDB [(none)]> flush privileges;
+
+MariaDB [(none)]> exit
+Bye
+
+
+四、配置zabbix源，安装zabbix server相关软件 
+
+cat /etc/yum.repos.d/zabbix34.repo
+[zabbix34]
+name=zabbix34
+baseurl=ftp://10.100.100.252/software/zabbix3.4
+enabled=1
+gpgcheck=0
+
+yum install zabbix-server-mysql zabbix-web-mysql 
+
+
+
+五、导入zabbix server需要的表 
+
+cd /usr/share/doc/zabbix-server-mysql-3.4.11/
+[root@zabbix-server zabbix-server-mysql-3.4.11]# zcat create.sql.gz | mysql -uroot zabbix 
+
+
+
+
+六、编辑zabbix server配置文件，指定数据库连接信息 
+
+vim /etc/zabbix/zabbix_server.conf 
+
+91 DBHost=localhost
+101 DBName=zabbix
+117 DBUser=admin
+	DBPassword=redhat
+132 DBSocket=/var/lib/mysql/mysql.sock
+
+
+systemctl start zabbix-server
+systemctl enable zabbix-server
+netstat -antp | grep zabbix
+
+>tcp        0      0 0.0.0.0:10051           0.0.0.0:*               LISTEN      11293/zabbix_server 
+>tcp6       0      0 :::10051                :::*                    LISTEN      11293/zabbix_server 
+
+
+
+
+七、访问zabbix web管理界面  
+
+修改php时区 
+
+vim /etc/httpd/conf.d/zabbix.conf 
+
+        php_value date.timezone Asia/shanghai
+
+
+systemctl restart httpd
+
+
+http://192.168.122.100/zabbix
+
+
+默认用户名Admin, 密码zabbix 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
