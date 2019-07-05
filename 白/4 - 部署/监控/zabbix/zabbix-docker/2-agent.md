@@ -15,7 +15,11 @@ docker start zabbix-web-nginx-mysql
 ## 不支持中文
 
 ```bash
-yum -y install kde-l10n-Chinese && yum -y reinstall glibc-common 
-localedef -c -f UTF-8 -i zh_CN zh_CN.utf8 
+yum -y install kde-l10n-Chinese && yum -y reinstall glibc-common
+localedef -c -f UTF-8 -i zh_CN zh_CN.utf8
 export LC_ALL=zh_CN.utf8
 ```
+
+## agent proxy
+
+`docker run --name zba3 -e ZBX_HOSTNAME="zba3"  -e ZBX_SERVER_HOST="172.17.0.1" -e ZBX_SERVER_PORT=10052  -p1008:10050 -d zabbix/zabbix-agent:centos-3.4-latest`
