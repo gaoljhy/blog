@@ -1,0 +1,1192 @@
+Linux Ansible
+
+作用：
+	
+	ansible是新出现的自动化运维工具，基于Python开发，实现了批量系统配置、批量程序部署、批量运行命令等功能。
+
+
+特性
+
+1.no agent: 不需要在被管控主机上安装任何软件
+2.no server: 无服务器端,使用时直接运行命令即可
+3.modules in any languages：基于模块工作，可使用任意语言开发模块,
+4.使用yaml语言定制剧本playbook
+5.ssh by default：基于SSH工作
+
+
+优点
+(1)、轻量级，无需在客户端安装agent，更新时，只需在操作机上进行一次更新即可；
+(2)、批量任务执行可以写成脚本，而且不用分发到远程就可以执行；
+(3)、使用python编写，维护更简单，ruby语法过于复杂；
+
+
+
+
+Ansible的安装部署：
+
+	方法1：
+		在线安装(EPEL源)
+	
+	方法2：
+	
+		自己制作本地yum源 
+	
+配置基于密钥的ssh认证 
+	
+[root@master ~]# yum install -y ansible
+
+
+ansible的配置文件：
+
+[root@master ~]# rpm -qc ansible
+/etc/ansible/ansible.cfg
+/etc/ansible/hosts
+
+/etc/ansible/hosts------------主机清单Inventory文件  
+
+写法1：
+	
+	node1.ansible.com 				
+	node2.ansible.com 
+	192.168.1.1
+	
+写法2：以组的方式
+
+[webserver]							
+	192.168.10.1
+	192.168.10.2				
+	
+[dbserver]	
+	192.168.20.1
+	192.168.20.2
+	
+	
+ansible模块  
+
+# ansible <PATTERN> -m <module_name> -a <arguments>
+
+PATTERN的写法：
+
+	某一个主机组的名称		web  
+	所有主机	all
+	写IP地址或主机名
+		one.example.com
+		one.example.com:two.example.com				>>>支持写多个主机名，不同的主机名间使用冒号":"隔开
+		192.168.1.50
+		192.168.1.*									>>>支持通配符
+		
+	'webservers:!phoenix'				>>>对属于webservers组中的主机，但不属于phoenix组的主机 
+	"webservers:&phoenix"				>>>对同时属于webservers和phoenix组中的主机进行操作 
+
+	正则表达式, 必须以~开头 
+		~(web|db).*\.example\.com
+		
+			web10.example.com
+			web20.example.com
+			db20.example.com 
+		
+		
+
+
+		
+查看ansible支持的模块  
+
+[root@master ~]# ansible-doc -l
+	
+查看模块支持的参数 
+
+# ansible-doc <模块名称>
+
+[root@master ~]# ansible-doc ping
+
+
+
+
+
+
+
+
+
+
+	
+ansible模块的说明：
+
+# ansible <pattern> -m <module_name> [-a <arguments>]
+
+1、ping 
+
+检测被管理端是否在线 
+	
+[root@master ~]# ansible test -m ping
+192.168.87.102 | SUCCESS => {
+    "changed": false, 
+    "ping": "pong"
+}
+[root@master ~]# 
+	
+
+2、command 
+
+	在被管理端执行命令
+	不支持重定向，管道 
+	默认模块
+	
+[root@master ~]# ansible test -m command -a 'uptime'
+192.168.87.102 | SUCCESS | rc=0 >>
+ 19:02:25 up  1:02,  3 users,  load average: 0.00, 0.00, 0.00
+
+[root@master ~]# ansible test -m command -a 'date'
+192.168.87.102 | SUCCESS | rc=0 >>
+Fri Dec  2 19:02:43 CST 2016
+
+[root@master ~]# ansible test -m command -a 'touch /tmp/aa.txt'
+192.168.87.102 | SUCCESS | rc=0 >>
+
+[root@master ~]# ansible test -m command -a 'ls /tmp'
+192.168.87.102 | SUCCESS | rc=0 >>
+aa.txt
+ansible_Rp0Uws
+yum.log
+
+[root@master ~]# ansible test -a "ls /tmp"
+192.168.87.102 | SUCCESS | rc=0 >>
+aa.txt
+ansible_SaISP7
+yum.log
+
+
+参数：
+	
+	chdir=<Directory>
+
+[root@master ~]# ansible test -m command -a "chdir=/tmp ls ./"
+192.168.87.102 | SUCCESS | rc=0 >>
+aa.txt
+ansible_zYCyTU
+yum.log
+
+[root@master ~]# 
+	
+	
+3、shell 
+
+	在被管理端执行命令 
+	支持重定向，管道 
+	
+[root@master ~]# ansible test -m shell -a 'echo "hello ansible" > /tmp/bb.txt'
+192.168.87.102 | SUCCESS | rc=0 >>
+
+
+[root@ansible_server ~]# ansible test_server -m shell -a "ifconfig eth0 | sed -n '2p' | awk '{print \$2}'"
+
+
+
+
+[root@master ~]# ansible test -m shell -a "ls /tmp"
+192.168.87.102 | SUCCESS | rc=0 >>
+aa.txt
+ansible_D4YLv4
+bb.txt
+yum.log
+
+[root@master ~]# 
+
+参数：
+
+	chdir=<Directory>
+	
+[root@master ~]# ansible test -m shell -a "chdir=/tmp ls ./"
+192.168.87.102 | SUCCESS | rc=0 >>
+aa.txt
+ansible_0umV5w
+bb.txt
+yum.log
+	
+	
+	
+4.copy模块
+
+	拷贝ansible管理端的文件到远程主机的指定位置
+
+常见参数有：
+     dest=    指明拷贝文件的目标目录位置，使用绝对路径，如果源是目录，则目标也要是目录,如果目标文件已存在，会覆盖原有内容
+     src=     指明本地路径下的某个文件，可以使用相对路径和绝对路径，支持直接指定目录，如果源是目录，则目标也要是目录
+     mode=    指明复制时，目标文件的权限
+     owner=   指明复制时，目标文件的属主
+     group=   指明复制时，目标文件的属组
+     content= 指明复制到目标主机上的内容，不能与src一起使用，相当于复制content指明的数据，到目标文件中	
+	
+[root@master ~]# ansible test -m copy -a "src=/etc/hosts dest=/tmp"
+192.168.87.102 | SUCCESS => {
+    "changed": true, 
+    "checksum": "7335999eb54c15c67566186bdfc46f64e0d5a1aa", 
+    "dest": "/tmp/hosts", 
+    "gid": 0, 
+    "group": "root", 
+    "md5sum": "54fb6627dbaa37721048e4549db3224d", 
+    "mode": "0644", 
+    "owner": "root", 
+    "size": 158, 
+    "src": "/root/.ansible/tmp/ansible-tmp-1480678980.74-146396715953485/source", 
+    "state": "file", 
+    "uid": 0
+}
+	
+	
+[root@master ~]# ansible test -m copy -a "src=/etc/passwd dest=/tmp mode=600 owner=nobody group=nobody"
+192.168.87.102 | SUCCESS => {
+    "changed": true, 
+    "checksum": "aa66816b64b79345d60de19b642cc7e62020038f", 
+    "dest": "/tmp/passwd", 
+    "gid": 99, 
+    "group": "nobody", 
+    "md5sum": "d97afe1f271c470a54f1f0763f97ba81", 
+    "mode": "0600", 
+    "owner": "nobody", 
+    "size": 947, 
+    "src": "/root/.ansible/tmp/ansible-tmp-1480679085.29-206165455771870/source", 
+    "state": "file", 
+    "uid": 99
+}
+	
+[root@master ~]# ansible test -m copy -a 'content="hello linux"  dest=/tmp/cc.txt  mode=600'
+192.168.87.102 | SUCCESS => {
+    "changed": true, 
+    "checksum": "223ce1d650508823f9dd51d8cb4b527ad3d03ca7", 
+    "dest": "/tmp/cc.txt", 
+    "gid": 0, 
+    "group": "root", 
+    "md5sum": "c5fe55563f6ea61e2b28be7c8a5835c2", 
+    "mode": "0600", 
+    "owner": "root", 
+    "size": 11, 
+    "src": "/root/.ansible/tmp/ansible-tmp-1480679297.69-177631978154126/source", 
+    "state": "file", 
+    "uid": 0
+}
+
+
+
+5.fetch模块   
+
+	从远程主机拉取文件到本地
+  	一般情况下，只会从一个远程节点拉取数据
+
+ 常见参数有：
+    dest=  从远程主机上拉取的文件存放在本地的位置，一般只能是目录
+    src=   指明远程主机上要拉取的文件，只能是文件，不能是目录
+
+[root@master ~]# ansible test -m fetch -a 'src=/etc/passwd dest=/tmp'
+192.168.87.102 | SUCCESS => {
+    "changed": true, 
+    "checksum": "974b44c114ecbd71bdee11e09a9bc14c9b0395bd", 
+    "dest": "/tmp/192.168.87.102/etc/passwd", 
+    "md5sum": "01d72332a8d9737631212995fe1494f4", 
+    "remote_checksum": "974b44c114ecbd71bdee11e09a9bc14c9b0395bd", 
+    "remote_md5sum": null
+}
+
+
+
+6.cron模块
+
+管理计划任务的模块
+  常见参数有：
+    minute=  指明计划任务的分钟，支持格式：0-59，*，*/2等，与正常cron任务定义的一样的语法,省略时，默认为*，也就是每分钟都执行
+    hour=    指明计划任务的小时，支持的语法：0-23，*，*/2等，省略时，默认为*，也就是每小时都执行
+    day=     指明计划任务的天，支持的语法：1-31，*，*/2等，省略时，默认为*，也就是每天都执行
+    month=   指明计划任务的月，支持的语法为：1-12，*，*/2等，省略时，默认为*，也就是每月都执行
+    weekday= 指明计划任务的星期几，支持的语法为：0-6，*等，省略时，默认为*，也就是每星期几都执行
+    reboot   指明计划任务执行的时间为每次重启之后
+    name=    给该计划任务取个名称,必须要给明。每个任务的名称不能一样。
+    job=     执行的任务是什么，当state=present时才有意义
+    state=present|absent   表示这个任务是创建还是删除，present表示创建，absent表示删除，默认是present
+
+
+[root@master ~]# ansible test -m cron -a 'minute=*/5 name=Ajob job="/usr/sbin/ntpdate 172.16.8.100 &> /dev/null" state=present'
+192.168.87.102 | SUCCESS => {
+    "changed": true, 
+    "envs": [], 
+    "jobs": [
+        "Ajob"
+    ]
+}
+
+[root@master ~]# ansible test -m shell -a 'crontab -l'
+192.168.87.102 | SUCCESS | rc=0 >>
+#Ansible: Ajob
+*/5 * * * * /usr/sbin/ntpdate 172.16.8.100 &> /dev/null
+
+[root@master ~]# 
+
+
+[root@master ~]# ansible test -m cron -a 'minute=*/5 name=Ajob job="/usr/sbin/ntpdate 172.16.8.100 &> /dev/null" state=absent'
+192.168.87.102 | SUCCESS => {
+    "changed": true, 
+    "envs": [], 
+    "jobs": []
+}
+
+
+
+
+
+7.file模块
+
+用于设定远程主机上的文件属性
+
+   常见参数有：
+        path=   指明对哪个文件修改其属性
+        src=   指明path=指明的文件是软链接文件，其对应的源文件是谁，必须要在state=link时才有用
+        state=directory|link|absent   表示创建的文件是目录还是软链接
+        owner=   指明文件的属主
+        group=   指明文件的属组
+        mode=   指明文件的权限
+
+        创建软链接的用法：
+            src=  path=  state=link
+        修改文件属性的用法：
+            path=  owner=  mode=  group=
+        创建目录的用法：
+            path=  state=directory
+        删除文件：
+            path= state=absent
+
+[root@ansible etc]# ansible testsrv -m file -a "path=/tmp/1.txt mode=600 owner=root group=nobody"
+
+[root@ansible ~]# ansible testsrv -m file -a "path=/tmp/bb mode=777 recurse=yes"
+
+
+创建软连接
+
+[root@master ~]# ansible test -m file -a 'src=/etc/passwd path=/tmp/passwd.link state=link'
+192.168.87.102 | SUCCESS => {
+    "changed": true, 
+    "dest": "/tmp/passwd.link", 
+    "gid": 0, 
+    "group": "root", 
+    "mode": "0777", 
+    "owner": "root", 
+    "size": 11, 
+    "src": "/etc/passwd", 
+    "state": "link", 
+    "uid": 0
+}
+
+
+删除文件
+[root@master ~]# ansible test -m file -a 'path=/tmp/cc.txt state=absent'
+192.168.87.102 | SUCCESS => {
+    "changed": true, 
+    "path": "/tmp/cc.txt", 
+    "state": "absent"
+}
+
+
+修改文件属性
+[root@master ~]# ansible test -m file -a 'path=/tmp/bb.txt mode=700 owner=root group=nobody'
+192.168.87.102 | SUCCESS => {
+    "changed": true, 
+    "gid": 99, 
+    "group": "nobody", 
+    "mode": "0700", 
+    "owner": "root", 
+    "path": "/tmp/bb.txt", 
+    "size": 14, 
+    "state": "file", 
+    "uid": 0
+}
+[root@master ~]# ansible test -m shell -a 'ls -l /tmp/bb.txt'
+192.168.87.102 | SUCCESS | rc=0 >>
+-rwx------ 1 root nobody 14 Dec  2  2016 /tmp/bb.txt
+
+[root@master ~]# 
+
+
+创建目录
+
+[root@master ~]# ansible test -m file -a 'path=/tmp/bj state=directory'
+192.168.87.102 | SUCCESS => {
+    "changed": true, 
+    "gid": 0, 
+    "group": "root", 
+    "mode": "0755", 
+    "owner": "root", 
+    "path": "/tmp/bj", 
+    "size": 4096, 
+    "state": "directory", 
+    "uid": 0
+}
+
+删除目录
+
+[root@master ~]# ansible test -m file -a 'path=/tmp/bj state=absent'
+192.168.87.102 | SUCCESS => {
+    "changed": true, 
+    "path": "/tmp/bj", 
+    "state": "absent"
+}
+[root@master ~]# ansible test -m shell -a 'ls -l /tmp'
+192.168.87.102 | SUCCESS | rc=0 >>
+total 16
+-rw-r--r-- 1 root   root      0 Dec  2  2016 aa.txt
+drwx------ 2 root   root   4096 Dec  2 13:41 ansible_twMJYb
+-rwx------ 1 root   nobody   14 Dec  2  2016 bb.txt
+-rw-r--r-- 1 root   root    158 Dec  2  2016 hosts
+-rw------- 1 nobody nobody  947 Dec  2  2016 passwd
+lrwxrwxrwx 1 root   root     11 Dec  2 13:35 passwd.link -> /etc/passwd
+-rw------- 1 root   root      0 Dec  2 00:58 yum.log
+
+[root@master ~]# 
+
+
+8.hostname模块
+        管理远程主机上的主机名
+        常用参数有
+			name=  指明主机名
+
+[root@master ~]# ansible test -m shell -a 'hostname'
+192.168.87.102 | SUCCESS | rc=0 >>
+node1.ansible.com
+
+[root@master ~]# ansible test -m hostname -a 'name=node2.ansible.com'
+192.168.87.102 | SUCCESS => {
+    "ansible_facts": {
+        "ansible_domain": "ansible.com", 
+        "ansible_fqdn": "node2.ansible.com", 
+        "ansible_hostname": "node2", 
+        "ansible_nodename": "node2.ansible.com"
+    }, 
+    "changed": true, 
+    "name": "node2.ansible.com"
+}
+[root@master ~]# 
+
+
+
+
+9.yum模块
+
+基于yum机制，对远程主机管理程序包
+
+   常用参数有：
+        name=   		指明程序包的名称，可以带上版本号，不指明版本，就是默认最新版本 
+			name=httpd
+			name=httpd-2.2.15
+        state=present|lastest|absent   指明对程序包执行的操作，present表示安装程序包，latest表示安装最新版本的程序包，absent表示卸载程序包
+        disablerepo=   				   在用yum安装时，临时禁用某个仓库，仓库的ID
+        enablerepo=   				   在用yum安装时，临时启用某个仓库,仓库的ID
+        conf_file=     				   指明yum运行时采用哪个配置文件，而不是使用默认的配置文件
+        disable_gpg_check=yes|no  		是否启用gpg-check
+
+
+卸载软件包:
+
+[root@master ~]# ansible test -m yum -a 'name=httpd state=absent'
+[root@master ~]# ansible test -m shell -a 'rpm -q httpd'
+
+
+安装软件包:
+
+[root@master ~]# ansible test -m yum -a 'name=httpd state=present'
+
+[root@ansible ~]# ansible 192.168.122.102 -m yum -a "name=ftp state=present disablerepo=zabbix"
+
+[root@ansible_server ~]# ansible test_server -m yum -a "name=zabbix-agent state=present enablerepo=zabbix3.2 disablerepo=zabbix"
+
+
+更新软件
+
+[root@ansible_server ~]# ansible test_server -m yum -a "name=zabbix-agent state=latest"
+
+
+
+
+
+
+
+10、service模块
+
+	用来管理远程主机上的服务的模块
+
+    常见参数有：
+        name=                             被管理的服务名称(/etc/init.d)
+        state=started|stopped|restarted   表示启动或关闭或重启
+        enabled=yes|no                    表示要不要设定该服务开机自启动
+        runlevel=2345                        如果设定了enabled开机自动启动，则要定义在哪些运行级别下自动启动
+
+
+[root@master ~]# ansible test -m service -a 'name=nginx state=started'
+192.168.87.102 | SUCCESS => {
+    "changed": true, 
+    "name": "nginx", 
+    "state": "started"
+}
+[root@master ~]# ansible test -m shell -a 'service nginx status'
+192.168.87.102 | SUCCESS | rc=0 >>
+nginx (pid  4054) is running...
+
+[root@master ~]# 
+
+
+[root@master ~]# ansible test -m service -a 'name=nginx state=stopped'
+192.168.87.102 | SUCCESS => {
+    "changed": true, 
+    "name": "nginx", 
+    "state": "stopped"
+}
+[root@master ~]# ansible test -m shell -a 'service nginx status'
+192.168.87.102 | FAILED | rc=3 >>
+nginx is stopped
+
+
+[root@master ~]# ansible test -m service -a 'name=nginx state=started enabled=yes runlevel=2345'
+192.168.87.102 | SUCCESS => {
+    "changed": true, 
+    "enabled": true, 
+    "name": "nginx", 
+    "state": "started"
+}
+[root@master ~]# ansible test -m shell -a 'chkconfig --list nginx'
+192.168.87.102 | SUCCESS | rc=0 >>
+nginx          	0:off	1:off	2:on	3:on	4:on	5:on	6:off
+
+[root@master ~]# 
+
+
+
+
+11. uri模块
+
+  如果远端是web服务器，可以利用ansible直接请求某个网页
+
+        常见参数有：
+
+        url=       指明请求的url的路径，如：http://10.1.32.68/test.jpg
+        user=      如果请求的url需要认证，则认证的用户名是什么
+        password=  如果请求的url需要认证，则认证的密码是什么
+        method=    指明请求的方法，如GET、POST, PUT, DELETE, HEAD
+
+
+[root@master ~]# ansible test -m uri -a 'url=http://192.168.87.102/index.html'
+192.168.87.102 | SUCCESS => {
+    "accept_ranges": "bytes", 
+    "changed": false, 
+    "connection": "close", 
+    "content_length": "612", 
+    "content_type": "text/html", 
+    "date": "Fri, 02 Dec 2016 06:31:58 GMT", 
+    "etag": "\"571f8501-264\"", 
+    "last_modified": "Tue, 26 Apr 2016 15:10:57 GMT", 
+    "msg": "OK (612 bytes)", 
+    "redirected": false, 
+    "server": "nginx/1.10.0", 
+    "status": 200, 
+    "url": "http://192.168.87.102/index.html"
+}
+[root@master ~]# 
+
+
+
+
+12.group模块
+
+用来添加或删除远端主机的用户组
+
+  常见参数有：
+        name=                  被管理的组名
+        state=present|absent   是添加还是删除,不指名默认为添加
+        gid=                   指明GID
+        system=yes|no          是否为系统组
+
+[root@master ~]# ansible test -m group -a 'name=hr gid=2000 state=present'
+192.168.87.102 | SUCCESS => {
+    "changed": true, 
+    "gid": 2000, 
+    "name": "hr", 
+    "state": "present", 
+    "system": false
+}
+
+[root@master ~]# ansible test -m shell -a 'tail -1 /etc/group'
+192.168.87.102 | SUCCESS | rc=0 >>
+hr:x:2000:
+
+
+
+
+13.user模块
+
+管理远程主机上的用户的账号
+
+    常见参数有：
+        name=   指明要管理的账号名称
+        state=present|absent   指明是创建账号还是删除账号，present表示创建，absent表示删除
+        system=yes|no   指明是否为系统账号
+        uid=   指明用户UID
+        group=   指明用户的基本组
+        groups=   指明用户的附加组
+        shell=   指明默认的shell
+        home=   指明用户的家目录
+        move_home=yes|no   当home设定了家目录，如果要创建的家目录已存在，是否将已存在的家目录进行移动
+        password=   指明用户的密码，最好使用加密好的字符串
+        comment=   指明用户的注释信息
+        remove=yes|no   当state=absent时，也就是删除用户时，是否要删除用户的而家目录
+
+[root@master ~]# ansible test -m user -a 'name=martin group=hr groups=shichang uid=500 shell=/bin/bash home=/home/martin comment="martin user"'
+192.168.87.102 | SUCCESS => {
+    "changed": true, 
+    "comment": "martin user", 
+    "createhome": true, 
+    "group": 2000, 
+    "groups": "shichang", 
+    "home": "/home/martin", 
+    "name": "martin", 
+    "shell": "/bin/bash", 
+    "state": "present", 
+    "system": false, 
+    "uid": 500
+}
+[root@master ~]# ansible test -m shell -a 'grep "martin:" /etc/passwd'
+192.168.87.102 | SUCCESS | rc=0 >>
+martin:x:500:2000:martin user:/home/martin:/bin/bash
+
+
+[root@master ~]# ansible test -m user -a 'name=martin state=absent remove=yes'
+192.168.87.102 | SUCCESS => {
+    "changed": true, 
+    "force": false, 
+    "name": "martin", 
+    "remove": true, 
+    "state": "absent"
+}
+
+
+
+
+14.script模块
+
+将管理端的某个脚本，移动到远端主机(不需要指明传递到远端主机的哪个路径下，系统会自动移动，然后执行)，
+ 一般是自动移动到远端主机的/root/.ansible/tmp目录下，然后自动给予其权限，然后再开个子shell然后运行脚本，运行完成后删除脚本
+
+测试脚本
+
+[root@master ~]# ansible test -m script -a '/root/1.sh'
+192.168.87.102 | SUCCESS => {
+    "changed": true, 
+    "rc": 0, 
+    "stderr": "", 
+    "stdout": "", 
+    "stdout_lines": []
+}
+[root@master ~]#
+
+
+
+
+15.setup模块
+
+可收集远程主机的facts变量的信息，相当于收集了目标主机的相关信息(如内核版本、操作系统信息、cpu、…)，保存在ansible的内置变量中，之后我们有需要用到时，直接调用变量即可
+
+
+[root@master ~]# ansible test -m setup
+192.168.87.102 | SUCCESS => {
+    "ansible_facts": {
+        "ansible_all_ipv4_addresses": [
+            "192.168.87.102"
+        ], 
+        "ansible_all_ipv6_addresses": [
+            "fe80::20c:29ff:fe0c:5ab9"
+        ], 
+        "ansible_architecture": "x86_64", 
+        "ansible_bios_date": "05/20/2014", 
+        "ansible_bios_version": "6.00", 
+
+
+		
+		
+		
+		
+		
+		
+剧本  playbook 				https://github.com/ansible/ansible-examples
+
+	以.yml结尾的文件，遵循yaml语法
+	
+		yaml语法：
+			1) 同级别代码要有相同的缩进，一般4个空格
+			2) 凡是有-或者有:时，后面都要跟一个空格
+	
+
+示例01：创建一个文件
+
+[root@ansible ~]# cat /etc/ansible/test.yml 
+
+- hosts: testsrv
+  user: root
+  tasks:
+    - name: touch a new file
+      shell: touch /tmp/1.mp3
+
+
+	  
+	  
+	  
+执行剧本
+
+[root@ansible ~]# ansible-playbook /etc/ansible/test.yml 
+
+	
+
+[root@ansible ~]# cat /etc/ansible/test02.yml 
+- name: file test
+  hosts: testsrv
+  user: root
+  tasks:
+    - name: create 2.mp3 file
+      shell: echo "2.mp3" > /tmp/2.mp3
+		
+			
+示例02：
+
+	playbook在执行时，默认会获取被管理端的fact变量，可以通过在playbook文件中使用"gather_facts: false"禁止该行为
+	
+[root@ansible ~]# cat /etc/ansible/user.yml 
+- hosts: testsrv
+  user: root
+  gather_facts: false
+  tasks:
+    - name: create nginx user
+      user: name=nginx shell=/sbin/nologin state=present
+
+
+
+示例03： 编译安装nginx
+
+[root@ansible_server ~]# cat /etc/ansible/nginx.yml 
+
+- hosts: test_server
+  user: root
+  tasks:
+     - name: copy nginx installer
+       copy: src=/tmp/nginx-1.13.4.tar.gz dest=/tmp
+
+     - name: install deps 
+       yum:
+         name:
+             - gcc
+             - openssl-devel
+             - pcre-devel
+         state: present
+
+     - name: install nginx
+       shell: tar xf nginx-1.13.4.tar.gz && cd nginx-1.13.4 && ./configure --prefix=/usr/local/nginx && make && make install
+       args:
+          chdir: /tmp
+
+     - name: startup nginx service
+       shell:
+          /usr/local/nginx/sbin/nginx && sed -ri '$a \/usr/local/nginx/sbin/nginx' /etc/rc.d/rc.local && chmod a+x /etc/rc.d/rc.local 
+
+
+
+
+	  
+		
+示例0=4：部署mariadb-server数据库 
+
+[root@ansible ~]# cat /etc/ansible/mysql.yml 
+- hosts: testsrv
+  user: root
+  tasks:
+    - name: install mariadb
+      yum: name=mariadb-server state=present
+
+    - name: copy config file
+      copy: src=/tmp/my.cnf dest=/etc/my.cnf
+
+    - name: start mysql daemon
+      service: name=mariadb state=started enabled=yes
+		
+		
+		
+		
+在playbook使用变量 
+
+
+示例01：在Playbook中定义变量
+
+[root@ansible ansible]# cat user02.yml 
+- hosts: testsrv
+  user: root
+  vars:
+    - username: "mike"
+  tasks:
+    - name: create mike
+      user: name={{ username }}
+ 
+
+示例02：在/etc/ansible/hosts文件中定义 
+
+[root@ansible ansible]# cat /etc/ansible/hosts 
+
+[testsrv]
+192.168.122.102 username="tom"
+192.168.122.103 username="jerry"
+
+
+[root@ansible ansible]# cat user03.yml 
+- hosts: testsrv
+  user: root
+  tasks:
+    - name: create user
+      user: name={{ username }} state=present
+
+
+
+示例03：为主机组定义变量 
+
+[testsrv:vars]			>>>主机组定义变量 
+software="bind"
+
+
+[root@ansible ansible]# cat a.yml 
+- hosts: testsrv
+  user: root
+  gather_facts: false
+  tasks:
+   - name: install software
+     yum: name={{ software }} state=present
+
+
+
+[root@ansible_server ansible]# cat config_server_id.yml 
+- hosts: test_server
+  user: root
+  tasks:
+    - name: config mysql server_id
+      shell: sed -ri '/log_bin/i \server_id={{ id }}' /etc/my.cnf
+	  
+	  
+	  
+	  
+	  
+[root@ansible_server ansible]# cat config_nginx_port.yml 
+- hosts: test_server
+  user: root
+  vars:
+     - port: 8080
+  tasks:
+     - name: config nginx port
+       shell: sed -ri '/listen/s/80/{{ port }}/' /usr/local/nginx/conf/nginx.conf && /usr/local/nginx/sbin/nginx -s reload
+ 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+
+
+在playbook使用条件判断 
+
+	when
+		
+		[  ]：  列表    ansible_processor[1]	通过下标取
+		{  }：  字典    ansible_python["type"]
+		
+
+[root@ansible ansible]# cat b.yml 
+
+- hosts: testsrv
+  user: root
+  vars:
+    - name01: "user01"
+    - name02: "user02"
+  tasks:
+    - name: create user01
+      user: name={{ name01 }} state=present
+      when: ansible_hostname == "agent01"
+
+    - name: create user02
+      user: name={{ name02 }} state=present
+      when: ansible_hostname == "node02"    
+
+
+	  
+[root@ansible_server ansible]# cat install_zabbix.yml 
+- hosts: test_server
+  user: root
+  tasks: 
+     - name: install zabbix server
+       yum: name=zabbix-server-mysql state=present
+       when: ansible_nodename == "node01.linux.com"
+
+     - name: install zabbix proxy
+       yum: name=zabbix-proxy-mysql state=present
+       when: ansible_nodename == "node02.linux.com"
+	  
+	  
+	  
+	  
+
+with_items实现循环
+
+示例01：通过列表的方式为item赋值 
+
+[root@ansible_server ansible]# cat test04.yml 
+- hosts: test_server
+  user: root
+  tasks:
+     - name: create file
+       file: path=/tmp/{{ item }} owner=root group=root mode=700 state=touch
+       with_items:
+           - 1.html
+           - 2.html
+           - 3.html
+
+
+
+示例02：通过字典的方式为item赋值 
+
+[root@ansible ansible]# cat d.yml 
+- hosts: testsrv
+  user: root
+  tasks:
+    - name: create user
+      user: name={{ item["username"] }} uid={{ item["userid"] }} shell=/sbin/nologin
+      with_items:
+        - {"username":"user03","userid":3000}
+        - {"username":"user04","userid":4000}
+
+
+
+
+handlers组件 
+
+	用于定义当某个条件触发时，执行的操作 
+	
+	应用场景用于当配置文件改动时，服务自动重启 
+	
+	
+示例01： 
+
+[root@ansible ~]# cat /etc/ansible/http.yml 
+- hosts: testsrv
+  user: root
+  tasks:
+    - name: install httpd
+      yum: name=httpd state=present
+
+    - name: copy httpd config file
+      copy: src=/tmp/httpd.conf dest=/etc/httpd/conf/httpd.conf
+      notify: restart httpd
+
+    - name: start httpd
+      service: name=httpd state=started enabled=yes
+
+  handlers:
+     - name: restart httpd
+       service: name=httpd state=reloaded
+
+
+	   
+	   
+	   
+	   
+
+template模块 
+
+	只能应用于Playbook中
+	
+	应用场景用于配置文件Jinja模板，实现变量替换
+	
+	建议准备Jinja配置文件时，文件名称以.j2结尾，以区分普通文件  
+	
+[root@ansible ~]# cat /etc/ansible/http.yml 
+- hosts: testsrv
+  user: root
+  tasks:
+    - name: install httpd
+      yum: name=httpd state=present
+
+    - name: copy httpd config file
+      template: src=/tmp/httpd.conf.j2 dest=/etc/httpd/conf/httpd.conf			>>>>template模块使用Jinja模板 
+      notify: restart httpd
+
+    - name: start httpd
+      service: name=httpd state=started enabled=yes
+
+  handlers:
+     - name: restart httpd
+       service: name=httpd state=reloaded
+	
+
+httpd.conf.j2部分内容如下：
+
+[root@ansible ~]# grep "Listen" /tmp/httpd.conf.j2 
+
+	Listen {{ ansible_all_ipv4_addresses[1] }}:9999
+	
+	
+	
+
+
+
+角色  role 
+
+创建角色目录：
+
+	/etc/ansible/roles/角色目录
+	
+		default 		保存角色默认变量
+		files			保存普通文件 
+		handlers		保存handlers
+		tasks 			保存任务，必须要有一个名称为main.yml 
+		templates		保存Jinja模块 
+		meta			保存资源间的依赖关系
+		vars 			保存变量
+
+		子目录间的文件，可以不加目录名称任意调用 
+
+示例01： 
+
+1、创建角色
+
+[root@ansible ansible]# mkdir /etc/ansible/roles/http
+[root@ansible ansible]# mkdir /etc/ansible/roles/http/{tasks,templates,handlers}
+
+[root@ansible ansible]# cat /etc/ansible/roles/http/tasks/main.yml 
+
+- name: install httpd
+  yum: name=httpd state=present
+
+- name: copy httpd config file
+  template: src=httpd.conf.j2 dest=/etc/httpd/conf/httpd.conf
+  notify: restart httpd
+
+- name: start httpd
+  service: name=httpd state=started enabled=yes
+
+
+[root@ansible ansible]# cat /etc/ansible/roles/http/handlers/main.yml 
+- name: restart httpd
+  service: name=httpd state=reloaded
+
+  
+[root@ansible ansible]# ls /etc/ansible/roles/http/templates/
+httpd.conf.j2
+
+  
+
+[root@ansible ansible]# tree  /etc/ansible/roles/http/
+/etc/ansible/roles/http/
+├── handlers
+│   └── main.yml
+├── tasks
+│   └── main.yml
+└── templates
+    └── httpd.conf.j2
+
+3 directories, 3 files
+
+
+
+2、使用角色 
+
+[root@ansible ansible]# cat /etc/ansible/http.yml 
+- hosts: testsrv
+  user: root
+  roles:
+    - http
+
+[root@ansible tasks]# ansible-playbook /etc/ansible/http.yml 
+
+
+
+
+示例02： 部署zabbix-agent，集中配置文件 
+
+
+1、创建角色目录  
+
+[root@ansible_server ~]# mkdir /etc/ansible/roles/zabbix_agent
+[root@ansible_server ~]# mkdir /etc/ansible/roles/zabbix_agent/{tasks,templates,handlers}
+
+[root@ansible_server ~]# cp /etc/zabbix/zabbix_agentd.conf /etc/ansible/roles/zabbix_agent/templates/zabbix_agentd.conf.j2
+
+[root@ansible_server ~]# tree /etc/ansible/roles/zabbix_agent/
+/etc/ansible/roles/zabbix_agent/
+├── handlers
+│   └── main.yml
+├── tasks
+│   └── main.yml
+└── templates
+    └── zabbix_agentd.conf.j2
+
+	
+[root@ansible_server ~]# cat /etc/ansible/roles/zabbix_agent/handlers/main.yml 
+- name: reload zabbix agent
+  service: name=zabbix-agent state=restart 
+
+  
+[root@ansible_server ~]# cat /etc/ansible/roles/zabbix_agent/tasks/main.yml 
+- name: install zabbix_agent
+  yum: name=zabbix-agent state=present
+
+- name: copy config file
+  template: src=zabbix_agentd.conf.j2 dest=/etc/zabbix/zabbix_agentd.conf
+  notify: reload zabbix agent
+
+- name: startup service
+  service: name=zabbix-agent state=started enabled=yes
+[root@ansible_server ~]# 
+	
+	
+	
+
+
+
+
+
+第二种写法：
+
+[root@ansible tasks]# tree /etc/ansible/roles/http/
+/etc/ansible/roles/http/
+├── handlers
+│   └── main.yml
+├── tasks
+│   ├── config.yml
+│   ├── install.yml
+│   ├── main.yml
+│   └── start.yml
+└── templates
+    └── httpd.conf.j2
+
+[root@ansible tasks]# cat /etc/ansible/roles/http/tasks/install.yml 
+- name: install httpd
+  yum: name=httpd state=present
+
+[root@ansible tasks]# cat /etc/ansible/roles/http/tasks/config.yml 
+- name: copy httpd config file
+  template: src=httpd.conf.j2 dest=/etc/httpd/conf/httpd.conf
+  notify: restart httpd
+
+[root@ansible tasks]# cat /etc/ansible/roles/http/tasks/start.yml 
+- name: start httpd
+  service: name=httpd state=started enabled=yes
+
+[root@ansible tasks]# cat /etc/ansible/roles/http/tasks/main.yml 
+- include: install.yml
+- include: config.yml
+- include: start.yml
+
+
