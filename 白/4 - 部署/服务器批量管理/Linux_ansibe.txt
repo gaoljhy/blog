@@ -1,5 +1,8 @@
 Linux Ansible
 
+> 
+<http://www.ansible.com.cn/docs/intro_inventory.html>
+
 作用：
 	
 	ansible是新出现的自动化运维工具，基于Python开发，实现了批量系统配置、批量程序部署、批量运行命令等功能。
