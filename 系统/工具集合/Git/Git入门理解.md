@@ -1,18 +1,12 @@
-<<<<<<< HEAD
 # Git 入门
-=======
-# 入门
->>>>>>> back
 
 ## 首先需要了解 git 的基本运行机制
 
 ![运行图]()
 
-<<<<<<< HEAD
 ## 名称
-=======
+
 + 名称
->>>>>>> back
 
 Workspace ： 工作区
 
@@ -41,15 +35,13 @@ Remote ： 远程仓库区 （GitHub仓库）
 8. `git push [remote-address] [branch]`# 上传本地指定分支到远程仓库
 9. 输入你账户名和密码，完成
 
-<<<<<<< HEAD
 `git push [remote-address] [本地branch]:[远程branch]`
 
-例子
-=======
-+ 例子
+### 例子
+
+--------------
 
 > `git push origin back:blog` 推送本地的分支back到远程blog分支下
->>>>>>> back
 
 ```sh
 $ mkdir runoob-git-test                     # 创建测试目录
@@ -69,13 +61,9 @@ $ git remote add origin git@github.com:tianqixin/runoob-git-test.git
 $ git push -u origin master
 ```
 
----
+---;
 
-<<<<<<< HEAD
 ## 常见使用命令记录
-=======
-### 常见使用命令记录
->>>>>>> back
 
 1. 查看本地工作区与暂存区不同 `git diff`
 2. 查看变动 `git status`

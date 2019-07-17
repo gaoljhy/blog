@@ -1,11 +1,12 @@
-## git 命令行汇总
-
+# git 命令行汇总
 
 ---
-### 一. 初始化本地代码库
+
+## 一. 初始化本地代码库
 
 本质上是产生一个 `.git` 隐藏文件夹 ，包含所有配置所需文件
-```
+
+```sh
 #在当前目录初始化一个Git代码库
 $ git init
 
@@ -15,12 +16,14 @@ $ git init [respository-name]
 #下载一个remote 仓库到本地文件夹下
 $ git clone (url)
 ```
-
-### 二. 修改和查看配置
+
+## 二. 修改和查看配置
+
 配置文件在`.git`中的config文件里
 
 同时要区分开全局配置(该`Bash`环境下的`git`统一配置)，和当前仓库配置
-```
+
+```sh
 # 显示当前 Git 配置
 # 一些基本的 remote 属性一定要检查看是否正确
 $ git config  --list
@@ -34,9 +37,10 @@ $ git config [--global] user.name "[name]"
 $ git config [--global] user.email "[email addres]"
 
 ```
-### 三. 暂存区增加/删除文件
 
-```
+## 三. 暂存区增加/删除文件
+
+```sh
 # 添加指定文件到暂存区
 $ git add [file1] [file2] ...
 
@@ -59,7 +63,7 @@ $ git mv [filename-old] [filename-renamed]
 
 ### 到本地仓库区的代码提交
 
-```
+```sh
 # 提交暂存区到本地仓库区
 $ git commit -m "[commit-message]"
 
@@ -81,7 +85,8 @@ $ git commit --amend [file1] [file2] ...
 ```
 
 ### 分支
-```
+
+```sh
 # 列出所有本地分支
 $ git branch
 
@@ -126,8 +131,10 @@ $ git push origin --delete [branch-name]
 $ git branch -dr [remote/branch]
 
 ```
+
 ### 标签
-```
+
+```sh
 # 列出所有tag
 $ git tag
 
@@ -155,8 +162,10 @@ $ git push [remote] --tags
 # 新建一个分支，指向某个tag
 $ git checkout -b [branch] [tag]
 ```
+
 ### 查看信息
-```
+
+```sh
 # 显示有变更的文件
 $ git status
 
@@ -221,8 +230,10 @@ $ git reflog
 # 从本地master拉取代码更新当前分支：branch 一般为master
 $ git rebase [branch]
 ```
-### 远程同步
-```
+
+## 远程同步
+
+```sh
 # 下载远程仓库的所有变动
 $ git fetch [remote]
 
@@ -246,8 +257,11 @@ $ git push [remote] --force
 
 # 推送所有分支到远程仓库
 $ git push [remote] --all
-九、撤销
+```
 
+## 九、撤销
+
+```sh
 # 恢复暂存区的指定文件到工作区
 $ git checkout [file]
 
@@ -280,8 +294,10 @@ $ git revert [commit]
 $ git stash
 $ git stash pop
 ```
-### 其他
-```
+
+## 其他
+
+```sh
 # 生成一个可供发布的压缩包
 $ git archive
 ```
