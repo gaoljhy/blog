@@ -1,0 +1,89 @@
+配置zabbix server监控本机 
+
+1、安装部署zabbix agent
+
+[root@zabbix-server ~]# yum install -y zabbix-agent 
+
+[root@zabbix-server ~]# vim /etc/zabbix/zabbix_agentd.conf 
+
+	Server=192.168.122.100			//被动模式
+	
+	ServerActive=192.168.122.100	//主动模式 
+
+	Hostname=Zabbix server
+
+[root@zabbix-server ~]# systemctl start zabbix-agent
+[root@zabbix-server ~]# systemctl enable zabbix-agent
+Created symlink from /etc/systemd/system/multi-user.target.wants/zabbix-agent.service to /usr/lib/systemd/system/zabbix-agent.service.
+[root@zabbix-server ~]# 
+[root@zabbix-server ~]# netstat -antp | grep zabbix
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      15070/zabbix_agentd 
+tcp        0      0 0.0.0.0:10051           0.0.0.0:*               LISTEN      11293/zabbix_server 
+tcp6       0      0 :::10050                :::*                    LISTEN      15070/zabbix_agentd 
+tcp6       0      0 :::10051                :::*                    LISTEN      11293/zabbix_server 
+[root@zabbix-server ~]# 
+
+
+
+2、在web页面启动本机监控
+
+
+
+
+
+
+解决图形乱码问题 
+
+
+[root@zabbix-server ~]# cp simkai.ttf /usr/share/zabbix/fonts/
+[root@zabbix-server ~]# ls /usr/share/zabbix/fonts/
+graphfont.ttf  simkai.ttf
+
+[root@zabbix-server ~]# vim /usr/share/zabbix/include/defines.inc.php 
+
+
+	define('ZBX_GRAPH_FONT_NAME',           'simkai');
+
+	define('ZBX_FONT_NAME', 'simkai');
+
+
+
+
+
+监控数据：
+
+1、CPU 
+
+	1) Context Switch  CPU上下文切换数 
+	
+	2) Interrupts	CPU中断数 
+	
+	3) CPU load  负载 
+
+		# uptime 
+		# lscpu 
+		
+	4) CPU使用率  
+
+		user  	用户进程占用的CPU 
+		system 	内核进程占用的CPU 
+		nice 	调整过优先级的进程占用CPU
+		idle	CPU空闲
+		io wait	等待磁盘IO、网卡IO占用的CPU
+		hi		硬中断
+		si 		软中断
+		steal	虚拟化应用占用的CPU 
+
+
+
+2、内存 
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,17 @@
+# Temp 测试
+
+FROM centos:latest
+
+MAINTAINER "lemon <lemon@gamil.com>"
+
+USER root
+
+RUN python app.py -h install
+
+EXPOSE 80
+
+COPY "./app.py" "/root/work"
+
+WORKDIR /etc/nginx/path
+
+

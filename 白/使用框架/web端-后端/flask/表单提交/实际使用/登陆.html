@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆</title>
+</head>
+<body>
+    <h1>{{ cntent }}</h1>
+
+    <p>adshhhahh </p>
+<form method="post" action={{ url_for('login') }}>
+{#<input type="text" >#}
+    <p>{{ getf.name.label }}</p>
+
+
+    <hr>
+    <p> {{ getf.name}}</p>
+    <hr>
+{#    <p>{{ getf.name.errors[0] }}</p>#}
+
+
+    <hr>
+    <hr>
+
+    <p>{{ getf.pwd.label }}</p>
+    <p>{{ getf.pwd }}</p>
+    <p>{{ getf.pwd }}</p>
+
+    <input type="submit" value="提交">
+</form>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+python第三方模块 
+
+	> pip install 模块名称  
+	
+python虚拟环境 
+
+	隔离
+
+
+1、创建虚拟环境 
+
+> python -m venv 虚拟环境名称 
+
+C:\Users\martin>d:
+D:\>python -m venv test1
+D:\>python -m venv test2
+
+
+2、进入test1环境，安装requests模块 
+
+D:\>cd test1
+D:\test1>cd Scripts
+D:\test1\Scripts>activate
+
+(test1) D:\>cd test1
+(test1) D:\test1>cd Scripts
+(test1) D:\test1\Scripts>pip install requests
+
+
+3、退出python虚拟环境  
+
+(test1) D:\test1\Scripts>deactivate
+
+
+
+--------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+

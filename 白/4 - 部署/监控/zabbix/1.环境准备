@@ -1,0 +1,107 @@
+
+
+FTP服务器：10.100.100.252
+
+vnc：10.0.224.255 
+
+
+准备环境：
+
+1、FileZilla  FTP客户端 
+
+2、安装Vmware workstation 
+
+	确认vmnet1  vmnet8虚拟网卡 
+
+3、CentOS 7.4 镜像文件
+
+
+4、安装虚拟机 
+
+	最小化安装 
+
+5、环境准备 
+
+1) 修改网卡IP地址
+
+cat /etc/sysconfig/network-scripts/ifcfg-ens33 
+TYPE="Ethernet"
+BOOTPROTO=none
+IPADDR=X.X.X.X
+PREFIX=24
+GATEWAY=X.x.x.x
+NAME="ens33"
+DEVICE="ens33"
+ONBOOT="yes"
+
+ 
+clear
+nmcli conn reload
+nmcli conn up ens33
+
+ping 10.100.100.252
+
+
+2) 关闭防火墙、SELinux 
+
+systemctl stop firewalld
+systemctl disable firewalld
+systemctl mask firewalld
+iptables -F
+
+
+关闭selinux ， 重启系统生效 
+
+vi /etc/sysconfig/selinux 
+
+	SELINUX=disabled
+
+
+3) 配置ftp yum源 
+
+cat /etc/redhat-release 
+CentOS Linux release 7.6.1810 (Core) 
+	
+a. 备份centos自带的yum源 
+
+mkdir /etc/yum.repos.d/bak
+mv /etc/yum.repos.d/*.repo /etc/yum.repos.d/bak
+ls /etc/yum.repos.d/
+
+	
+
+b. 配置ftp源 
+
+cat /etc/yum.repos.d/centos.repo
+[centos]
+name=centos
+baseurl=ftp://10.100.100.252/software/centos7.6
+enabled=1
+gpgcheck=0
+
+	
+	
+c. 查看可用yum源 
+
+yum repolist	
+
+	
+4) 安装基础软件 
+
+yum install -y vim-enhanced net-tools ntpdate lftp bash-completion psmisc 
+
+	
+	
+5) 重启系统，确认selinux关闭 
+
+reboot
+	
+getenforce 
+
+
+
+
+
+	
+
+

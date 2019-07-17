@@ -1,0 +1,27 @@
+# python-ssh
+
+FROM python:latest
+LABEL Author="lemon"
+LABEL mail="<gjlove666@hotmail.com>"
+
+# 时区设置
+ENV TZ=Asia/Shanghai
+USER root
+RUN pip3 install --upgrade pip
+RUN pip3 install ptvsd
+# /usr/local/lib/python3.7/site-packages/ptvsd
+# 暴露端口
+EXPOSE 6543
+
+# 用户进入目录
+WORKDIR /root
+COPY ./server.py /root/
+RUN mkdir /root/logs
+
+# python -m ptvsd --host 0.0.0.0 --port 6543 server.py
+CMD [ "python3","/root/server.py" ]
+# build指令
+# docker build -t adminhub/ptvsd:latest -f dockerfile  ./
+
+# 创建指令
+# docker create -it --name some-ptvsd -p 6543:6543 -v ~/docker-workdir/:/work:rw adminhub/ptvsd:latest
