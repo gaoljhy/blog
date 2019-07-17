@@ -1,0 +1,229 @@
+获取数据的方法
+
+	1) 链接模板 
+	2) 利用zabbix自带键值 
+	3) 自定义键值获取数据 
+	
+
+自定义键值监控 
+
+	基于被监控端操作 
+	
+		UnsafeUserParameters=1		//允许自定义的键值名称出现特殊字符 
+		
+		UserParameter=<key>,<shell command>		//自定义键值 
+		
+	特别注意：
+	
+		确保zabbix用户有权限执行获取数据的命令
+	
+
+
+1、监控物理内存剩余量 
+
+[root@node01 ~]# vim /etc/zabbix/zabbix_agentd.conf 
+
+
+	UnsafeUserParameters=1
+	UserParameter=memory.free,free -m | grep "Mem" | awk '{print $4}'
+
+[root@node01 ~]# systemctl restart zabbix-agent
+
+
+在zabbix server测试获取数据 
+
+[root@zabbix-server ~]# yum install -y zabbix-get 
+
+[root@zabbix-server ~]# zabbix_get -s 192.168.122.164 -k memory.free
+	
+	
+2、监控httpd进程数 
+
+UserParameter=httpd.number,ps -elf | grep "http" | grep -v "grep" | wc -l
+	
+	
+	
+以MySQL为例 
+
+1、常规参数 
+
+	进程状态：
+		net.tcp.port[,3306]
+	
+	数据目录空间：
+		
+		vfs.fs.size[数据目录, free]
+		
+	二进制日志目录
+		
+		vfs.fs.size[数据目录，free]
+		
+		
+2、基本状态 
+
+1) MySQL的连接数 
+
+UserParameter=mysql.conn.number,mysql -uroot -e "show processlist" | sed '1d' | wc -l
+
+
+2) mysql运行状态  
+
+[root@node01 ~]# mysql -uroot -e "status"
+--------------
+mysql  Ver 15.1 Distrib 5.5.56-MariaDB, for Linux (x86_64) using readline 5.1
+
+Connection id:		4
+Current database:	
+Current user:		root@localhost
+SSL:			Not in use
+Current pager:		stdout
+Using outfile:		''
+Using delimiter:	;
+Server:			MariaDB
+Server version:		5.5.56-MariaDB MariaDB Server
+Protocol version:	10
+Connection:		Localhost via UNIX socket
+Server characterset:	latin1
+Db     characterset:	latin1
+Client characterset:	utf8
+Conn.  characterset:	utf8
+UNIX socket:		/var/lib/mysql/mysql.sock
+Uptime:			4 min 10 sec
+
+Threads: 1  Questions: 12  Slow queries: 1  Opens: 0  Flush tables: 2  Open tables: 26  Queries per second avg: 0.048
+--------------
+
+[root@node01 ~]# 
+
+	Threads: 线程数 
+	Slow queries: 慢查询数
+	Queries per second avg:  查询执行平均时间  单位 秒 
+
+
+	
+启用慢查询 	
+[root@node01 ~]# head -n 6 /etc/my.cnf
+[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+long_query_time=3
+slow_query_log=ON
+slow_query_log_file=slow.log
+
+	
+	
+3) 扩展状态 
+
+[root@node01 ~]# mysqladmin -uroot extended-status 
+
+
+		Com_select		//执行的查询数
+		Com_delete
+		Com_insert
+		Com_update
+	
+		Com_commit		//事务的提交数 
+		Com_rollback
+	
+	
+		Qcache_hits		//查询缓存命中率 
+	
+	
+mysqladmin -uroot extended-status | grep -i "qcache_hit" | awk '{print $4}'
+
+
+主从复制 
+
+MariaDB [(none)]> show slave status\G;
+*************************** 1. row ***************************
+               Slave_IO_State: Waiting for master to send event
+                  Master_Host: 192.168.122.101
+                  Master_User: repluser
+                  Master_Port: 3306
+                Connect_Retry: 60
+              Master_Log_File: master-bin.000003
+          Read_Master_Log_Pos: 5250
+               Relay_Log_File: mariadb-relay-bin.000002
+                Relay_Log_Pos: 765
+        Relay_Master_Log_File: master-bin.000003
+             Slave_IO_Running: Yes			>>>
+            Slave_SQL_Running: Yes			>>>
+              Replicate_Do_DB: 
+          Replicate_Ignore_DB: 
+           Replicate_Do_Table: 
+       Replicate_Ignore_Table: 
+      Replicate_Wild_Do_Table: 
+  Replicate_Wild_Ignore_Table: 
+                   Last_Errno: 0
+                   Last_Error: 
+                 Skip_Counter: 0
+          Exec_Master_Log_Pos: 5250
+              Relay_Log_Space: 1061
+              Until_Condition: None
+               Until_Log_File: 
+                Until_Log_Pos: 0
+           Master_SSL_Allowed: No
+           Master_SSL_CA_File: 
+           Master_SSL_CA_Path: 
+              Master_SSL_Cert: 
+            Master_SSL_Cipher: 
+               Master_SSL_Key: 
+        Seconds_Behind_Master: 0			>>> 主从复制延时时间 
+Master_SSL_Verify_Server_Cert: No
+                Last_IO_Errno: 0
+                Last_IO_Error: 
+               Last_SQL_Errno: 0
+               Last_SQL_Error: 
+  Replicate_Ignore_Server_Ids: 
+             Master_Server_Id: 101
+	
+	
+	
+	
+
+	
+================================================================================================================		
+awk命令简单使用 
+
+	默认按空白字符分割文本，获取数据 
+
+	
+[root@node01 ~]# ifconfig eth0 | grep "netmask" | awk '{print $2}'
+
+[root@node01 ~]# df -hT | grep "/$" | awk '{print $5}'
+
+	-F 指定分割符 
+	
+[root@node01 ~]# head -n 1 /etc/passwd | awk -F: '{print $6}'
+
+[root@node01 ~]# cat /tmp/test.txt  | awk '{print "test>>> ", $2}'
+test>>>  is
+test>>>  bb
+
+[root@node01 ~]# rpm -qa | grep php | awk -F-5 '{print "rpm -e --nodeps", $1}' | bash
+
+[root@node01 ~]# df -hT | grep "^/dev" | awk '{print "磁盘名称:", $1, "剩余容量:", $5}'
+
+================================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

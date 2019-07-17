@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+width=1000 heigh=1000
+>
+    <polyline points="100 100,200 100,200 200,300 200,300 300,400 300,400 400"/>
+</svg>

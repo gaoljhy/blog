@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3c.org/2000/svg"
+width=200 height=200>
+<rect width="200" height="200"
+fill=black
+/>
+<ellipse 
+cx=68 cy=100 
+rx=19 ry=40
+fill=red
+stroke=blue
+stroke-width=20
+/>
+<ellipse 
+cx=101 cy=100 
+rx=19 ry=40
+fill=red
+stroke=blue
+stroke-width=20
+/>
+<ellipse 
+cx=85 cy=80 
+rx=2 ry=40
+fill=red
+stroke=blue
+stroke-width=4
+opacity=0.4
+/>
+<line 
+x1="85" x2="85" y1="58" y2="0" 
+stroke=rgb(255,255,255)
+opacity=0.4
+/>
+</svg>
