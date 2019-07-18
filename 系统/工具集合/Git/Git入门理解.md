@@ -19,6 +19,8 @@ Remote ： 远程仓库区 （GitHub仓库）
 > 本地仓库 和 远程仓库 都包含整个项目的源代码，但是存在不同
 > 本地仓库存在自己的修改，需要`push`通过以后才能内更新到y远程仓库区
 
+---
+
 ## 基本流程如下
 
 1. `git clone project_url` : 将远程服务器的项目克隆到本地(区分`fetch`刷新)
@@ -66,6 +68,9 @@ $ git push -u origin master
 1. 查看本地工作区与暂存区不同 `git diff`
 2. 查看变动 `git status`
 3. 取消一个 commit文件 `git reset HEAD -- [file]`
-4. 更新远程仓库区变动 `git fetch`
-5. 取回远程仓库的变化，并与本地工作区分支合并 `git pull [remote] [branch]`
-6. 本地仓库提交以后，会使远程仓库和本地同步，所以远程仓库中多余的都会被删掉
+
+---
+
+1. 更新远程仓库区变动 `git fetch`
+2. 取回远程仓库的变化，并与本地工作区分支合并 `git pull [remote] [branch]`
+3. 本地仓库提交以后，会使远程仓库和本地同步，所以远程仓库中多余的都会被删掉
