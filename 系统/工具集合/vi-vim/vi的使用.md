@@ -4,7 +4,7 @@
 
 vim 具有程序编辑的能力，可以主动的以字体颜色辨别语法的正确性，方便程序设计。
 
-相关文章：[史上最全Vim快捷键键位图](http://www.runoob.com/w3cnote/all-vim-cheatsheat.html)
+相关文章：[史上最全Vim快捷键键位图](http://www.gao.com/w3cnote/all-vim-cheatsheat.html)
 
 # `vim`
 

@@ -47,7 +47,7 @@ python字符串格式化符号:
 `print('常量 PI 的值近似为 {0:.3f}。'.format(math.pi))`
 > 常量 PI 的值近似为 3.142。
 
-`table = {'Google': 1, 'Runoob': 2, 'Taobao': 3}`
-`print('Runoob: {0[Runoob]:d}; Google: {0[Google]:d}; Taobao: {0[Taobao]:d}'.format(table))`
+`table = {'Google': 1, 'gao': 2, 'Taobao': 3}`
+`print('gao: {0[gao]:d}; Google: {0[Google]:d}; Taobao: {0[Taobao]:d}'.format(table))`
 
-`Runoob: 2; Google: 1; Taobao: 3`
+`gao: 2; Google: 1; Taobao: 3`

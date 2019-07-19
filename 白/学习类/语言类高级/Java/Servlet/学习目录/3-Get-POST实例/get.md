@@ -2,12 +2,12 @@
 
 下面是一个简单的 URL，将使用 `GET` 方法向 `HelloForm` 程序传递两个值。
 
-`http://localhost:8080/TomcatTest/HelloForm?name=菜鸟教程&url=www.runoob.com`
+`http://localhost:8080/TomcatTest/HelloForm?name=Mr.G&url=www.gao.com`
 
 下面是处理 Web 浏览器输入的 HelloForm.java Servlet 程序。我们将使用 getParameter() 方法，可以很容易地访问传递的信息：
 
 ```java
-package com.runoob.test;
+package com.gao.test;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -73,14 +73,14 @@ public class HelloForm extends HttpServlet {
 <web-app>
   <servlet>
     <servlet-name>HelloForm</servlet-name>
-    <servlet-class>com.runoob.test.HelloForm</servlet-class>
+    <servlet-class>com.gao.test.HelloForm</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>HelloForm</servlet-name>
     <url-pattern>/TomcatTest/HelloForm</url-pattern>
   </servlet-mapping>
 </web-app>
-现在在浏览器的地址栏中输入 http://localhost:8080/TomcatTest/HelloForm?name=菜鸟教程&url=www.runoob.com ，并在触发上述命令之前确保已经启动 Tomcat 服务器。如果一切顺利，您会得到下面的结果：
+现在在浏览器的地址栏中输入 http://localhost:8080/TomcatTest/HelloForm?name=Mr.G&url=www.gao.com ，并在触发上述命令之前确保已经启动 Tomcat 服务器。如果一切顺利，您会得到下面的结果：
 
 
 
@@ -91,7 +91,7 @@ public class HelloForm extends HttpServlet {
 <html>
 <head>
 <meta charset="utf-8">
-<title>菜鸟教程(runoob.com)</title>
+<title>Mr.G(gao.com)</title>
 </head>
 <body>
 <form action="HelloForm" method="GET">

@@ -11,14 +11,14 @@
 
 ```python
 >>>import re
->>> re.split('\W+', 'runoob, runoob, runoob.')
-['runoob', 'runoob', 'runoob', '']
+>>> re.split('\W+', 'gao, gao, gao.')
+['gao', 'gao', 'gao', '']
 
->>> re.split('(\W+)', ' runoob, runoob, runoob.') 
-['', ' ', 'runoob', ', ', 'runoob', ', ', 'runoob', '.', '']
+>>> re.split('(\W+)', ' gao, gao, gao.') 
+['', ' ', 'gao', ', ', 'gao', ', ', 'gao', '.', '']
 
->>> re.split('\W+', ' runoob, runoob, runoob.', 1) 
-['', 'runoob, runoob, runoob.']
+>>> re.split('\W+', ' gao, gao, gao.', 1) 
+['', 'gao, gao, gao.']
  
 >>> re.split('a*', 'hello world')   # 对于一个找不到匹配的字符串而言，split 不会对其作出分割
 ['hello world']

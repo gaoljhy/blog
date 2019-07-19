@@ -44,9 +44,9 @@ Remote ： 远程仓库区 （GitHub仓库）
 > `git push origin back:blog` 推送本地的分支back到远程blog分支下
 
 ```sh
-$ mkdir runoob-git-test                     # 创建测试目录
-$ cd runoob-git-test/                       # 进入测试目录
-$ echo "# 菜鸟教程 Git 测试" >> README.md     # 创建 README.md 文件并写入内容
+$ mkdir gao-git-test                     # 创建测试目录
+$ cd gao-git-test/                       # 进入测试目录
+$ echo "# Mr.G Git 测试" >> README.md     # 创建 README.md 文件并写入内容
 $ ls                                        # 查看目录下的文件
 README
 $ git init                                  # 初始化
@@ -57,7 +57,7 @@ $ git commit -m "添加 README.md 文件"        # 提交并备注信息
  create mode 100644 README.md
 
 # 提交到 Github 这里用ssh 
-$ git remote add origin git@github.com:tianqixin/runoob-git-test.git
+$ git remote add origin git@github.com:tianqixin/gao-git-test.git
 $ git push -u origin master
 ```
 

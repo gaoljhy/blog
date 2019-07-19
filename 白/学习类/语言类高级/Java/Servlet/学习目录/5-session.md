@@ -60,7 +60,7 @@ HttpSession session = request.getSession();
 Session 跟踪实例
 本实例说明了如何使用 HttpSession 对象获取 session 会话创建时间和最后访问时间。如果不存在 session 会话，我们将通过请求创建一个新的 session 会话。
 
-package com.runoob.test;
+package com.gao.test;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -93,11 +93,11 @@ public class SessionTrack extends HttpServlet {
         //设置日期输出的格式  
         SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
     
-        String title = "Servlet Session 实例 - 菜鸟教程";
+        String title = "Servlet Session 实例 - Mr.G";
         Integer visitCount = new Integer(0);
         String visitCountKey = new String("visitCount");
         String userIDKey = new String("userID");
-        String userID = new String("Runoob");
+        String userID = new String("gao");
         if(session.getAttribute(visitCountKey) == null) {
             session.setAttribute(visitCountKey, new Integer(0));
         }
@@ -105,7 +105,7 @@ public class SessionTrack extends HttpServlet {
     
         // 检查网页上是否有新的访问者
         if (session.isNew()){
-            title = "Servlet Session 实例 - 菜鸟教程";
+            title = "Servlet Session 实例 - Mr.G";
              session.setAttribute(userIDKey, userID);
         } else {
              visitCount = (Integer)session.getAttribute(visitCountKey);
@@ -158,7 +158,7 @@ public class SessionTrack extends HttpServlet {
     <!-- 类名 -->  
     <servlet-name>SessionTrack</servlet-name>
     <!-- 所在的包 -->
-    <servlet-class>com.runoob.test.SessionTrack</servlet-class>
+    <servlet-class>com.gao.test.SessionTrack</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>SessionTrack</servlet-name>

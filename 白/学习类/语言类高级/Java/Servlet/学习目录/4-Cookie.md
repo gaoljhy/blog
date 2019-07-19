@@ -20,7 +20,7 @@ HTTP/1.1 200 OK
 Date: Fri, 04 Feb 2000 21:03:38 GMT
 Server: Apache/1.3.9 (UNIX) PHP/4.0b3
 Set-Cookie: name=xyz; expires=Friday, 04-Feb-07 22:03:38 GMT; 
-                 path=/; domain=runoob.com
+                 path=/; domain=gao.com
 Connection: close
 Content-Type: text/html
 正如您所看到的，Set-Cookie 头包含了一个名称值对、一个 GMT 日期、一个路径和一个域。名称和值会被 URL 编码。expires 字段是一个指令，告诉浏览器在给定的时间和日期之后"忘记"该 Cookie。
@@ -44,9 +44,9 @@ Servlet 就能够通过请求方法 request.getCookies() 访问 Cookie，该方�
 
 序号	方法 & 描述
 1	public void setDomain(String pattern)
-该方法设置 cookie 适用的域，例如 runoob.com。
+该方法设置 cookie 适用的域，例如 gao.com。
 2	public String getDomain()
-该方法获取 cookie 适用的域，例如 runoob.com。
+该方法获取 cookie 适用的域，例如 gao.com。
 3	public void setMaxAge(int expiry)
 该方法设置 cookie 过期的时间（以秒为单位）。如果不这样设置，cookie 只会在当前 session 会话中持续有效。
 4	public int getMaxAge()
@@ -87,7 +87,7 @@ response.addCookie(cookie);
 实例
 让我们修改我们的 表单数据实例，为名字和姓氏设置 Cookie。
 
-package com.runoob.test;
+package com.gao.test;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -171,7 +171,7 @@ public class HelloForm extends HttpServlet {
     <!-- 类名 -->  
     <servlet-name>HelloForm</servlet-name>
     <!-- 所在的包 -->
-    <servlet-class>com.runoob.test.HelloForm</servlet-class>
+    <servlet-class>com.gao.test.HelloForm</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>HelloForm</servlet-name>
@@ -183,7 +183,7 @@ public class HelloForm extends HttpServlet {
 <html>
 <head>
 <meta charset="utf-8">
-<title>菜鸟教程(runoob.com)</title>
+<title>Mr.G(gao.com)</title>
 </head>
 <body>
 <form action="/TomcatTest/HelloForm" method="GET">
@@ -209,7 +209,7 @@ public class HelloForm extends HttpServlet {
 让我们读取上面的实例中设置的 Cookie
 
 ```java
-package com.runoob.test;
+package com.gao.test;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -303,7 +303,7 @@ public class ReadCookies extends HttpServlet {
 实例
 下面的例子将删除现有的名为 "url" 的 cookie，当您下次运行 ReadCookies 的 Servlet 时，它会返回 url 为 null。
 
-package com.runoob.test;
+package com.gao.test;
 
 import java.io.IOException;
 import java.io.PrintWriter;

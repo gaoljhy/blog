@@ -27,6 +27,6 @@
 "'RUN'"
 >>> dict = {'google': 'google.com'};
 >>> repr(dict)
-"{'runoob': 'runoob.com'}"
+"{'gao': 'gao.com'}"
 >>>
 ```

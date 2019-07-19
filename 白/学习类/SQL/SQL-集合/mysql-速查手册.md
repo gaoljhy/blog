@@ -1,12 +1,12 @@
 
 ## 创建表
 ```sql
-CREATE TABLE IF NOT EXISTS `runoob_tbl`(
-   `runoob_id` INT UNSIGNED AUTO_INCREMENT,
-   `runoob_title` VARCHAR(100) NOT NULL,
-   `runoob_author` VARCHAR(40) NOT NULL,
+CREATE TABLE IF NOT EXISTS `gao_tbl`(
+   `gao_id` INT UNSIGNED AUTO_INCREMENT,
+   `gao_title` VARCHAR(100) NOT NULL,
+   `gao_author` VARCHAR(40) NOT NULL,
    `submission_date` DATE,
-   PRIMARY KEY ( `runoob_id` )
+   PRIMARY KEY ( `gao_id` )
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ```
 ##表的格式更改:

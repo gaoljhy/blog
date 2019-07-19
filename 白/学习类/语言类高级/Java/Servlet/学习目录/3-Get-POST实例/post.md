@@ -6,7 +6,7 @@
 
 ```java
 String name =new String(request.getParameter("name").getBytes("ISO8859-1"),"UTF-8");
-package com.runoob.test;
+package com.gao.test;
 ```
 
 ```java
@@ -74,7 +74,7 @@ public class HelloForm extends HttpServlet {
 <html>
 <head>
 <meta charset="utf-8">
-<title>菜鸟教程(runoob.com)</title>
+<title>Mr.G(gao.com)</title>
 </head>
 <body>
 <form action="HelloForm" method="POST">
@@ -99,11 +99,11 @@ public class HelloForm extends HttpServlet {
 <html>
 <head>
 <meta charset="utf-8">
-<title>菜鸟教程(runoob.com)</title>
+<title>Mr.G(gao.com)</title>
 </head>
 <body>
 <form action="CheckBox" method="POST" target="_blank">
-<input type="checkbox" name="runoob" checked="checked" /> 菜鸟教程
+<input type="checkbox" name="gao" checked="checked" /> Mr.G
 <input type="checkbox" name="google"  /> Google
 <input type="checkbox" name="taobao" checked="checked" /> 淘宝
 <input type="submit" value="选择站点" />
@@ -115,7 +115,7 @@ public class HelloForm extends HttpServlet {
 下面是 CheckBox.java Servlet 程序，处理 Web 浏览器给出的复选框输入。
 
 ```java
-package com.runoob.test;
+package com.gao.test;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -148,7 +148,7 @@ public class CheckBox extends HttpServlet {
                 "<h1 align=\"center\">" + title + "</h1>\n" +
                 "<ul>\n" +
                 "  <li><b>菜鸟按教程标识：</b>: "
-                + request.getParameter("runoob") + "\n" +
+                + request.getParameter("gao") + "\n" +
                 "  <li><b>Google 标识：</b>: "
                 + request.getParameter("google") + "\n" +
                 "  <li><b>淘宝标识：</b>: "
@@ -168,7 +168,7 @@ public class CheckBox extends HttpServlet {
 <web-app>
   <servlet>
     <servlet-name>CheckBox</servlet-name>
-    <servlet-class>com.runoob.test.CheckBox</servlet-class>
+    <servlet-class>com.gao.test.CheckBox</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>CheckBox</servlet-name>
@@ -275,7 +275,7 @@ public class ReadParams extends HttpServlet {
 <html>
 <head>
 <meta charset="utf-8">
-<title>菜鸟教程(runoob.com)</title>
+<title>Mr.G(gao.com)</title>
 </head>
 <body>
 
@@ -297,7 +297,7 @@ public class ReadParams extends HttpServlet {
 <web-app>
   <servlet>
     <servlet-name>ReadParams</servlet-name>
-    <servlet-class>com.runoob.test.ReadParams</servlet-class>
+    <servlet-class>com.gao.test.ReadParams</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ReadParams</servlet-name>
