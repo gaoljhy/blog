@@ -15,4 +15,4 @@
 + `csrutil disable`命令关闭`rootless`
 + 可以用`csrutil enable`命令恢复rootless
 
-------------------------------;
+------------------------------
