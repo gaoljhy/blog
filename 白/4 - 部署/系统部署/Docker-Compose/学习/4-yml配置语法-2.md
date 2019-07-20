@@ -108,7 +108,7 @@ volumes:
 ## command
 
 >  docker create IMAGE [COMMAND]
->> 对应 COMMAND ,可自己指定,也可覆盖
+>> 对应 COMMAND ,可自己指定覆盖
 
 覆盖容器启动后默认执行的命令
 

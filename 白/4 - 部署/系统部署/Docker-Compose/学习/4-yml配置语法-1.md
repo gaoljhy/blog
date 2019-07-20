@@ -1,6 +1,6 @@
 # 语法
 
-## compose常用服务配置简介
+## yaml常用服务配置简介
 
 `Compose`文件是一个定义**服务**，**网络**和**卷**的`YAML`文件。
 > Compose文件的默认文件名为docker-compose.yml。
@@ -13,11 +13,24 @@
 
 ### 配置选项
 
-> 本节包含版本`3`中服务定义支持的所有配置选项。
+> 包含yml版本`3`中服务定义支持的所有配置选项。
 
 ------------------
 
-## build
+## docker-compose.yml 属性
+
+> 参考 <https://docs.docker.com/compose/compose-file/>
+>> 可在该页下找到对应的`yml`配置所有选项
+
++ `version`：指定 `docker-compose.yml` 文件的写法格式
+
++ `services`：多个容器集合
+
++ `build`：配置构建时
+  > Compose 会利用它自动构建镜像
+  >> 该值可以是一个路径，也可以是一个对象，用于指定 `Dockerfile`
+
+### build
 
 > `docker build`
 >> 等同于docker命令行中使用 build 构造 image
@@ -27,7 +40,7 @@
 `build` 可以指定包含构建上下文的路径：
 
 ```yaml
-version: '2'
+version: '3'
 services:
   webapp:
     build: ./dir
@@ -36,7 +49,7 @@ services:
 或者，作为一个对象，该对象具有上下文路径和指定的Dockerfile文件以及`args`参数值：
 
 ```yaml
-version: '2'
+version: '3'
 services:
   webapp:
     build:

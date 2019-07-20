@@ -1,0 +1,26 @@
+version : "3"
+services :
+
+ redis:
+    image : redis:4.0.14
+    container_name : myredis
+    expose:
+        - "6379"
+    volumes:
+        - /root/docker-workdir/redis.conf:/usr/local/etc/redis/redis.conf:ro
+    command : [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
+ 
+ python:
+    build :
+        context: ./python
+        dockerfile: dockerfile
+    image: mypython:3.6.9-alpine
+    container_name : mypython
+    links :
+        - redis:myredis
+    ports:
+        - "8088:80"
+        - "8087:8888"
+    volumes:
+        - /root/docker-workdir/python:/usr/src/myapp:rw
+    command : ["python","/usr/src/myapp/index.py"]
