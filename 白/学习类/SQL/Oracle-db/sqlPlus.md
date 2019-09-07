@@ -95,7 +95,7 @@ edit 文件名　　　把当前目录中指定的.sql文件调入编辑器进�
 clear screen　　 清空当前屏幕显示 
 
 二．Oracle sqlplus语句编辑命令 
-首先我们输入这样一条指令： 
+首先输入这样一条指令： 
 SELECT emp_id, emp_name 
 FROM Employees 
 input 命令可以接着上一条指令的后面添加语句，比如在上述语句运行后输入： 

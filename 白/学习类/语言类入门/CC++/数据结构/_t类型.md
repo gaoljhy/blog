@@ -3,7 +3,7 @@
 + `sizeof`返回的必定是无符号整形,在标准c中通过 `typedef` 将返回值类型定义为`size_t`.
     若用`printf`输出size_t类型时,C99中定义格式符%zd;若编译器不支持可以尝试%u或%lu. sizeof，获取操作数占用的内存空间字节数,返回类型size_t； strlen，获取字符数组实际使用的字节数,不包含数组结尾符’\0’，返回类型size_t。
 
-+ 它是一种“整型”类型，里面保存的是一个整数，就像int, long那样。这种整数用来记录一个大小(size)。size_t 的全称应该是size type，就是说“一种用来记录大小的数据类型”。通常我们用sizeof(XXX)操作，这个操作所得到的结果就是size_t类型。因为size_t类型的数据其实是保存了一个整数，所以它也可以做加减乘除，也可以转化为int并赋值给int类型的变量。
++ 它是一种“整型”类型，里面保存的是一个整数，就像int, long那样。这种整数用来记录一个大小(size)。size_t 的全称应该是size type，就是说“一种用来记录大小的数据类型”。通常用sizeof(XXX)操作，这个操作所得到的结果就是size_t类型。因为size_t类型的数据其实是保存了一个整数，所以它也可以做加减乘除，也可以转化为int并赋值给int类型的变量。
 
 类似的还有wchar_t、 ptrdiff_t。 wchar_t就是wide char type，“一种用来记录一个宽字符的数据类型”。 ptrdiff_t就是pointer difference type，“一种用来记录两个指针之间的距离的数据类型”。 代码举例：
 

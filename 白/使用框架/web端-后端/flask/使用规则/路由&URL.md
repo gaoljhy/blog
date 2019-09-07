@@ -125,7 +125,7 @@ def about():
 /login?next=/
 /user/John%20Doe
 ```
-（这里也用到了 `test_request_context()` 方法，下面会解释。即使我们正在通过 `Python` 的 `shell` 进行交互，它依然会告诉 `Flask` 要表现为正在处理一个请求。请看下面的解释。 环境局部变量 ）
+（这里也用到了 `test_request_context()` 方法，下面会解释。即使正在通过 `Python` 的 `shell` 进行交互，它依然会告诉 `Flask` 要表现为正在处理一个请求。请看下面的解释。 环境局部变量 ）
 
 为什么你要构建 `URL` 而非在模板中硬编码？
 这里有三个绝妙的理由：

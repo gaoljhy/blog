@@ -21,8 +21,8 @@
 
     `sudo createinstallmedia --volume 盘 --applicationpath 安装程序 --nointeraction`
     `sudo /Applications/Install\ OS\ X\ Yosemite.app/Contents/Resources/createinstallmedia --volume /Volumes/PC6 --applicationpath /Applications/Install\ OS\ X\ Yosemite.app`
-        `/Volumes/U盘名称` 是我们的U盘地址，如果您的U盘为【username】，那么这里的格式应为：`volume /Volumes/username`
-        `Install\ OS\ X\ Yosemite.app`这里没有写错，这里的\ 是转义语法，整个名称对应的是：`Install OS X Yosemite.app`即我们从 AppStore下载的 系统安装文件名，如果是中文，仍然需要写成英文，并且需注意其【\】转义符号（保留空格）
+        `/Volumes/U盘名称` 是的U盘地址，如果您的U盘为【username】，那么这里的格式应为：`volume /Volumes/username`
+        `Install\ OS\ X\ Yosemite.app`这里没有写错，这里的\ 是转义语法，整个名称对应的是：`Install OS X Yosemite.app`即从 AppStore下载的 系统安装文件名，如果是中文，仍然需要写成英文，并且需注意其【\】转义符号（保留空格）
 
         如果发生错误:
             可能是在终端中打开过，影响写入，关掉该终端即可
@@ -50,5 +50,5 @@
 
 6. 右击磁盘上图的磁盘图标，选择 推出 功能按钮：
 7. 如果需要制作苹果电脑U盘启动盘需要插入U盘，打开磁盘工具，选择U盘（不是卷），点抹掉，U盘中的数据会被全部清除，并被重新创建为GUID分区格式，分区为Mac OS 扩展（日志式）。
-8. 选择U盘的卷，菜单：`编辑 - 恢复`，点映像按钮，选择我们前面创建的`dmg`，然后点恢复。
+8. 选择U盘的卷，菜单：`编辑 - 恢复`，点映像按钮，选择前面创建的`dmg`，然后点恢复。
 9. 完成后，U盘就是一个`OSX`安装盘了。

@@ -56,10 +56,10 @@ if __name__ == '__main__':
     application.run()
 好了，这个 wsgi:application 参数就很好理解了， 分两部：wsgi 就是引导用的 python 文件名称（不包括后缀/模块名）application 就是 Flask 实例的名称。这样 gunicorn 就会找到具体要 host 哪一个 flask 实例了。
 
-从这里开始就可以体现 gunicorn 的好了，我们根本不用配什么配置文件的，一个指令就可以将它起动。
+从这里开始就可以体现 gunicorn 的好了，根本不用配什么配置文件的，一个指令就可以将它起动。
 
 Nginx 的配置
-关于 Nginx 我也就不详细讲了，我们就直奔主题，杀入 Nginx 的默认配置文件
+关于 Nginx 我也就不详细讲了，就直奔主题，杀入 Nginx 的默认配置文件
 
 sudo nano /etc/nginx/site-avalidable/default
 暴力修改成为以下的内容
@@ -82,7 +82,7 @@ server {
 
 sudo service nginx restart
 将 Gunicorn 作为服务运行
-这就是最后一步了，我们在此将采用 UpStart 配置Flask程序作为服务程序在Linux起动时运行。首先建立起动配置文件:
+这就是最后一步了，在此将采用 UpStart 配置Flask程序作为服务程序在Linux起动时运行。首先建立起动配置文件:
 
 sudo nano /etc/init/myflask.conf
 然后加入如下配置

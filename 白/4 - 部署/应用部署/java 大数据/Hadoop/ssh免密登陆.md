@@ -35,7 +35,7 @@
 
 4. 在hserver1上创建authorized_keys文件
 
-  1. 在3台机器`.ssh/`目录下都存入一个内容相同的文件，文件名称叫`authorized_keys`,文件内容是我们刚才为3台机器生成的公钥。
+  1. 在3台机器`.ssh/`目录下都存入一个内容相同的文件，文件名称叫`authorized_keys`,文件内容是刚才为3台机器生成的公钥。
   2. 把3台机器刚才生成的公钥加入到这个`master`的`authorized_keys`文件里
   3. 将这个`authorized_keys`文件复制到其余俩台机子上去
 

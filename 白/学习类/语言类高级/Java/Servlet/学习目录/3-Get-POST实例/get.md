@@ -4,7 +4,7 @@
 
 `http://localhost:8080/TomcatTest/HelloForm?name=Mr.G&url=www.gao.com`
 
-下面是处理 Web 浏览器输入的 HelloForm.java Servlet 程序。我们将使用 getParameter() 方法，可以很容易地访问传递的信息：
+下面是处理 Web 浏览器输入的 HelloForm.java Servlet 程序。将使用 getParameter() 方法，可以很容易地访问传递的信息：
 
 ```java
 package com.gao.test;
@@ -66,7 +66,7 @@ public class HelloForm extends HttpServlet {
 }
 ```
 
-然后我们在 web.xml 文件中创建以下条目：
+然后在 web.xml 文件中创建以下条目：
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -85,7 +85,7 @@ public class HelloForm extends HttpServlet {
 
 
 使用表单的 GET 方法实例
-下面是一个简单的实例，使用 HTML 表单和提交按钮传递两个值。我们将使用相同的 Servlet HelloForm 来处理输入。
+下面是一个简单的实例，使用 HTML 表单和提交按钮传递两个值。将使用相同的 Servlet HelloForm 来处理输入。
 
 <!DOCTYPE html>
 <html>

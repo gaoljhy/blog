@@ -6,7 +6,7 @@ HTTP 是一种"无状态"协议，这意味着每次客户端检索网页时，�
 Cookies
 一个 Web 服务器可以分配一个唯一的 session 会话 ID 作为每个 Web 客户端的 cookie，对于客户端的后续请求可以使用接收到的 cookie 来识别。
 
-这可能不是一个有效的方法，因为很多浏览器不支持 cookie，所以我们建议不要使用这种方式来维持 session 会话。
+这可能不是一个有效的方法，因为很多浏览器不支持 cookie，所以建议不要使用这种方式来维持 session 会话。
 
 隐藏的表单字段
 一个 Web 服务器可以发送一个隐藏的 HTML 表单字段，以及一个唯一的 session 会话 ID，如下所示：
@@ -58,7 +58,7 @@ HttpSession session = request.getSession();
 该方法在 Servlet 容器指示该 session 会话无效之前，指定客户端请求之间的时间，以秒为单位。
 
 Session 跟踪实例
-本实例说明了如何使用 HttpSession 对象获取 session 会话创建时间和最后访问时间。如果不存在 session 会话，我们将通过请求创建一个新的 session 会话。
+本实例说明了如何使用 HttpSession 对象获取 session 会话创建时间和最后访问时间。如果不存在 session 会话，将通过请求创建一个新的 session 会话。
 
 package com.gao.test;
 

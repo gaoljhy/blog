@@ -52,6 +52,6 @@ service 指定服务名(telnet ftp pop3 mssql mysql ssh ssh2......）
 ` hydra IP ftp -l 用户名 -P 密码字典 -e ns -vV`
 
 
-我们拿SSH为例
+拿SSH为例
 参数：
 h`ydra -L users.txt （用户的字典）-P password.txt （密码字典）-vV -o（参数） ssh.log（保存的日志） -e ns IP ssh`

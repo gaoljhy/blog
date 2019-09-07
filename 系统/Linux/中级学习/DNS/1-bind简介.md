@@ -14,6 +14,6 @@
 　　chroot 是通过相关文件封装在一个伪根目录内，已达到安全防护的目的，一旦程序被攻破，将只能访问伪根目录内的内容，而不是真实的根目录
 
 - BIND安装好之后不会有预制的配置文件
-  但是在BIND的文档文件夹内（`/usr/share/doc/bind-9.9.4`），BIND为我们提供了配置文件模板，我们可以直接拷贝过来：
+  但是在BIND的文档文件夹内（`/usr/share/doc/bind-9.9.4`），BIND为提供了配置文件模板，可以直接拷贝过来：
 　　　　`cp -r /usr/share/doc/bind-9.9.4/sample/etc/* /var/named/chroot/etc/`
 　　　　`cp -r /usr/share/doc/bind-9.9.4/sample/var/* /var/named/chroot/var/`

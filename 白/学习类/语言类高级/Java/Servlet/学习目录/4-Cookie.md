@@ -85,7 +85,7 @@ cookie.setMaxAge(60*60*24);
 
 response.addCookie(cookie);
 实例
-让我们修改我们的 表单数据实例，为名字和姓氏设置 Cookie。
+让修改的 表单数据实例，为名字和姓氏设置 Cookie。
 
 package com.gao.test;
 
@@ -196,7 +196,7 @@ public class HelloForm extends HttpServlet {
 </html>
 保存上面的 HTML 内容到文件 /TomcatTest/test.html 中。
 
-接下来我们访问http://localhost:8080/TomcatTest/test.html，Gif 演示如下：
+接下来访问http://localhost:8080/TomcatTest/test.html，Gif 演示如下：
 
 
 
@@ -206,7 +206,7 @@ public class HelloForm extends HttpServlet {
 要读取 Cookie，您需要通过调用 HttpServletRequest 的 getCookies( ) 方法创建一个 javax.servlet.http.Cookie 对象的数组。然后循环遍历数组，并使用 getName() 和 getValue() 方法来访问每个 cookie 和关联的值。
 
 实例
-让我们读取上面的实例中设置的 Cookie
+让读取上面的实例中设置的 Cookie
 
 ```java
 package com.gao.test;

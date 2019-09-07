@@ -3,13 +3,13 @@
 其它选择见 `uWSGI` 和 独立 `WSGI` 容器 章节。
 
 在它们上的任何一个运行你的 WSGI 应用首先需要一个 `FastCGI` 服务器。
-最流行的一个 是 `flup` ，我们会在本指导中使用它。确保你已经安装好它来跟随下面的说明。
+最流行的一个 是 `flup` ，会在本指导中使用它。确保你已经安装好它来跟随下面的说明。
 
 
 创建一个 `.fcgi` 文件
 ------------------------------------------
 
-首先你需要创建一个 FastCGI 服务器文件。让我们把它叫做 `yourapplication.fcgi`:
+首先你需要创建一个 FastCGI 服务器文件。让把它叫做 `yourapplication.fcgi`:
 ```python
 #!/usr/bin/python
 from flup.server.fcgi import WSGIServer

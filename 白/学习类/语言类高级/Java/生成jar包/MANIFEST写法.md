@@ -1,6 +1,6 @@
 
 ## 关于 MANIFEST.MF 写法.
-例如我们打包的jar为 Test.jar 
+例如打包的jar为 Test.jar 
 
 ```
 Manifest-Version: 1.0 

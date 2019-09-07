@@ -25,7 +25,7 @@
 
 1. 激活事件(Activation Events)：vscode已定义的插件变为活动状态的事件。
 
-2. 贡献点(Contribution Points)：在`package.json` `Extension Manifest`中为扩展`VS Code`而进行的静态声明。
+2. 绑定点(Contribution Points)：在`package.json` `Extension Manifest`中为扩展`VS Code`而进行的静态声明。
 
 2. `VS Code API`：可以在扩展代码中调用的`vscode`提供的一组`JavaScript API`。
 
@@ -124,8 +124,11 @@ The extension entry file exports two functions, `activate` and `deactivate`.
     1. activate is executed when your registered Activation Event happens. 
     2. deactivate gives you a chance to clean up before your extension becomes deactivated.
 
-The vscode module contains a script located at node ./node_modules/vscode/bin/install. The script pulls the VS Code API definition file depending on the engines.vscode field in package.json. After running the script, you would get IntelliSense, jump to definition and other TypeScript language features in your code.
+The vscode module contains a script located at node `./node_modules/vscode/bin/install`.
+The script pulls the `VS Code API` definition file depending on the engines.
+vscode field in `package.json`. After running the script, you would get IntelliSense, jump to definition and other TypeScript language features in your code.
 
+```js
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
@@ -152,3 +155,4 @@ export function activate(context: vscode.ExtensionContext) {
 
 // this method is called when your extension is deactivated
 export function deactivate() {}
+```

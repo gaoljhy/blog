@@ -33,7 +33,7 @@ public class YamlDataObject {
 `attributes`来描述`DataObject`里的值。
 这些值可能为`DataObject`，也可能是`JYaml`所支持的其他类型。
 
-我们希望用`YamlDataObject`来担当`DataObject`的角色，因此`YamlDataObject`和`DataObject`要能互相转化。
+希望用`YamlDataObject`来担当`DataObject`的角色，因此`YamlDataObject`和`DataObject`要能互相转化。
 
 ### 增加两个API
 

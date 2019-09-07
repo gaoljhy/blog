@@ -62,7 +62,7 @@ r' ,'||'；
 
 3. tcpdump 的输出结果介绍
 
-下面我们介绍几种典型的tcpdump命令的输出信息
+下面介绍几种典型的tcpdump命令的输出信息
 　　　(1) 数据链路层头信息
 　　　使用命令#tcpdump --e host ice
 　　　ice 是一台装有linux的主机，她的MAC地址是0：90：27：58：AF：1A

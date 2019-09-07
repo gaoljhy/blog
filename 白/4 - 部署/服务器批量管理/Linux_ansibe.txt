@@ -689,7 +689,7 @@ martin:x:500:2000:martin user:/home/martin:/bin/bash
 
 15.setup模块
 
-可收集远程主机的facts变量的信息，相当于收集了目标主机的相关信息(如内核版本、操作系统信息、cpu、…)，保存在ansible的内置变量中，之后我们有需要用到时，直接调用变量即可
+可收集远程主机的facts变量的信息，相当于收集了目标主机的相关信息(如内核版本、操作系统信息、cpu、…)，保存在ansible的内置变量中，之后有需要用到时，直接调用变量即可
 
 
 [root@master ~]# ansible test -m setup
