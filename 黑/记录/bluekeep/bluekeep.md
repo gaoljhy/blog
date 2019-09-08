@@ -35,3 +35,12 @@ cp cve_2019_0708_bluekeep.rb /opt/metasploit-framework/embedded/framework/module
 > 小心蓝屏
 
 
+### 主要设置的参数有RHOSTS / RPORT / target
+
+* RHOSTS 靶机ip
+* RPORT rdp端口
+* target ID数字(可选为0-4)设置受害机机器架构
+
+> target 234 多数是虚拟机，默认为0
+
+> show targets //显示exploit支持的操作系统类型
