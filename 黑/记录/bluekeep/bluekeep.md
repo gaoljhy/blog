@@ -41,6 +41,6 @@ cp cve_2019_0708_bluekeep.rb /opt/metasploit-framework/embedded/framework/module
 * RPORT rdp端口
 * target ID数字(可选为0-4)设置受害机机器架构
 
-> target 234 多数是虚拟机，默认为0
+> target 234 多数是虚拟机，默认为0,3 是 vmware较多使用
 
-> show targets //显示exploit支持的操作系统类型
+> show targets //显示exploit支持的操作系统类型，虚拟机类型
