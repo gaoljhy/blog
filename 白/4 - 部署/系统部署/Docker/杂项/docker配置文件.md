@@ -1,5 +1,8 @@
 # 配置文件
 
+可使用命令
+`docker info | grep Dir`
+
 `/etc/default/docker`
 
 ## 环境配置文件
