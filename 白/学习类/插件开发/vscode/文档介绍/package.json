@@ -1,4 +1,4 @@
-{
+w{
 	// 参考 <https://code.visualstudio.com/docs/extensionAPI/extension-manifest>
 	// 插件的名字，应全部小写，不能有空格
 	"name": "vscode-plugin-demo",
