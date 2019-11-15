@@ -34,3 +34,8 @@ def main(argv):
 
 if __name__ == "__main__":
 	main(sys.argv[1:])
+
+# python greenhat.py <n>
+# n : 前多少天
+# python greenhat.py <n> <date> 
+# date : eg.2013-04-05 从date 前的 n天
