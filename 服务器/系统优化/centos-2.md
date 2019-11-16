@@ -1,6 +1,6 @@
 ## 修改SSH登录配置
 
-`vi /etc/ssh/ssh_config`
+`vi /etc/ssh/sshd_config`
 
 ```conf
 Port 2222
