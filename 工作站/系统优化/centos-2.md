@@ -79,7 +79,7 @@ USERCTL=no
 
 设置自动退出终端，防止非法关闭ssh客户端造成登录进程过多，可以设置大一些，单位为秒
 
-`echo "TMOUT=3600">> /etc/profile`
+`echo "TMOUT=300">> /etc/profile`
 
 
 立即生效

@@ -11,27 +11,33 @@ sed -i "98 a$username    ALL=(ALL)       NOPASSWD: ALL" /etc/sudoers
 
 ## iptables 设置
 
+`iptables -L -n`  查看
+
 ```sh
-/etc/init.d/iptables restart
 iptables -F
 iptables -X
 iptables -Z
 iptables -A INPUT -p icmp -j ACCEPT
 iptables -A INPUT -i lo -j ACCEPT
 #允许某个IP段远程访问ssh
-iptables -A INPUT -p tcp -m tcp --dport 2222 -s 192.168.64.0/24 -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 2222 -s 192.168.0.99 -j ACCEPT
 #开启80端口
-iptables -A INPUT -P tcp -m tcp --dropt 80 -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
 #允许某个IP的所有请求
 # iptables -A INPUT -p all -s 124.43.56.90/30 -j ACCEPT
 iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
 iptables -P INPUT DROP
 iptables -P OUTPUT ACCEPT
 iptables -P FORWARD DROP
-
-/etc/init.d/iptables save
-/etc/init.d/iptables restart
 ```
+
+###  永久保存
+
+`service iptables save`
+
+> 无法永久保存即未安装 `yum install iptables-services` `systemctl enable iptables.service`
+
+> > 或者安装之后修改 `/etc/sysconfig/iptables`  文件
 
 ## 修改默认DNS
 
@@ -61,7 +67,7 @@ echo -e "net.netfilter.nf_conntrack_max = 25000" >> /etc/sysctl.conf
 echo -e "net.netfilter.nf_conntrack_tcp_timeout_established = 180" >> /etc/sysctl.conf
 echo -e "net.netfilter.nf_conntrack_tcp_timeout_time_wait = 20" >> /etc/sysctl.conf
 echo -e "net.netfilter.nf_conntrack_tcp_timeout_close_wait = 20" >> /etc/sysctl.conf
-echo -e "net.netfilter.nf_conntrack_tcp_timeout_fin_wait = 20" >> /etc/sysctl.confo
+echo -e "net.netfilter.nf_conntrack_tcp_timeout_fin_wait = 20" >> /etc/sysctl.conf
 ```
 
 ## 减少磁盘 IO

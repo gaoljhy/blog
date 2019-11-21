@@ -11,13 +11,13 @@ systemctl list-unit-files | grep enable
 ### 关闭所有服务
 
 ```bash
-for sun in `systemctl list-units --type=service | grep enable |awk '{print $1}'`;do systemctl disable  $sun ;done
+for sun in `systemctl list-unit-files --type=service | grep enable |awk '{print $1}'`;do systemctl disable  $sun ;done
 ```
 
 ### 开启指定服务
 
 ```bash
-for sun in crond rsyslog sshd network iptables;do systemctl enable $sun ;done
+for sun in crond rsyslog sshd network  NetworkManager iptables;do systemctl enable $sun ;done
 ```
 
 > 重启 reboot
@@ -26,7 +26,7 @@ for sun in crond rsyslog sshd network iptables;do systemctl enable $sun ;done
 
 ## 3. 关闭不需要的TTY
 
-`vim /etc/init/start-ttys.conf`
+`vi /etc/init/start-ttys.conf`
 
 > 修改 `/dev/tty[1-2]` 即可 ,开启 `1-2`
 
@@ -69,14 +69,29 @@ yum install -y ntpdate
 crontab -e
 
 # 添加
-*/5 * * * * /usr/sbin/ntpdate 0.cn.pool.ntp.org &> /dev/null
+*/5 * * * * /usr/sbin/ntpdate ntp2.aliyun.com && hwclock -w && hwclock --systoh &> /dev/null
 ```
+> 可以采用阿里服务器
+ntp1.aliyun.com
+ntp2.aliyun.com
+ntp3.aliyun.com
+ntp4.aliyun.com
 
-> 可修改也可不修改 配置文件 `/etc/ntp/step-tickers` 加入 `0.cn.pool.ntp.org`
+> 可修改也可不修改 配置文件 `/etc/ntp/step-tickers` 加入 
 
 更新时间并且写入BOIS
 
-`ntpdate 0.cn.pool.ntp.org && hwclock -w && hwclock --systoh`
+`ntpdate ntp1.aliyun.com && hwclock -w && hwclock --systoh`
+
+### 修改时区
+
+```sh
+timedatectl list-timezones |grep Shanghai    #查找中国时区的完整名称
+# Asia/Shanghai
+timedatectl set-timezone Asia/Shanghai    #其他时区以此类推
+```
+
+
 
 ## 修改同时最大打开文件数目(句柄)限制
 
@@ -91,8 +106,8 @@ crontab -e
 添加以下俩行
 
 ```
-*   hard  nofile    10000
-*   soft  nofile    10000
+*   hard  nofile    1000
+*   soft  nofile    1000
 ```
 
 > 大型服务器一般根据并发端口数填 65535
@@ -101,7 +116,7 @@ crontab -e
 ```sh
 vi /etc/rc.local
 // 添加如下内容
-ulimit -SHn 10000
+ulimit -SHn 1000
 ```
 
 > ulimit -n 查看此设置值
@@ -133,4 +148,4 @@ echo "IPV6INIT=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0
 
 内核调参
 
-`echo -e "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.confo`
+`echo -e "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf`
