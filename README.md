@@ -1,7 +1,8 @@
 # Welcome to My BlogPages
 
 
-<p align="center">"<i>NOthing or Everything</i>"</p>
+
+<p align="center">"<i>If you have a goal, then you will find a way to achieve it.</i>"</p>
 
 <h4 align="center">A collection of Study redord, learing note, awesome lists, manuals, blogs, hacks, one-liners, cli/web tools and more.</h4>
 
