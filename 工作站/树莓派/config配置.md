@@ -1,16 +1,76 @@
+# For more options and information see
+# http://rpf.io/configtxt
+# Some settings may impact device functionality. See link above for details
 
-# 配置项
+# uncomment if you get no picture on HDMI for a default "safe" mode
+#hdmi_safe=1
 
-`sdtv_mode = 0` (預設是0 NTSC 但是大陸部分電視是PAL[歐規]就要改成 sdtv_mode =2 )
-`sdtv_aspect = 3` ( 1 4:3, 2 14:9, 3 16:9 不要問我14:9是哪個怪比例....)
-`hdmi_force_hotplug=1` (強制從hdmi輸出,根據博主測試,這個純粹是安心用...加不加無所謂)
-`hdmi_drive=2` (這個很重要，如果是使用HDMI to DVI 要選擇 1[沒有聲音輸出] )
-`hdmi_group=2` (1是 CEA，2是 DMT，這邊因為我要輸出到電視，所以選擇1。)
-(這個是標準的選擇，差距在於兩個標準的輸出方式不同，CEA靠近電視，DMT比較靠近monitor,詳情參閱原文)
-`hdmi_mode=35` (我們選擇了 1080P 60Hz，如果電視支援的比較少，請參考相對應的選擇...例如 720P)
+# uncomment this if your display has a black border of unused pixels visible
+# and your display can output without overscan
+#disable_overscan=1
 
-参考以下
+# uncomment the following to adjust overscan. Use positive numbers if console
+# goes off screen, and negative if there is too much border
+#overscan_left=16
+#overscan_right=16
+#overscan_top=16
+#overscan_bottom=16
 
-<http://blog.sina.cn/dpool/blog/s/blog_6ab7ecff0101afot.html>
+# uncomment to force a console size. By default it will be display's size minus
+# overscan.
+#framebuffer_width=1280
+#framebuffer_height=720
 
-https://blog.csdn.net/pang9998/article/details/90116371
+# uncomment if hdmi display is not detected and composite is being output
+#hdmi_force_hotplug=1
+
+# uncomment to force a specific HDMI mode (this will force VGA)
+#hdmi_group=1
+#hdmi_mode=1
+
+# uncomment to force a HDMI mode rather than DVI. This can make audio work in
+# DMT (computer monitor) modes
+#hdmi_drive=2
+
+# uncomment to increase signal to HDMI, if you have interference, blanking, or
+# no display
+#config_hdmi_boost=4
+
+# uncomment for composite PAL
+#sdtv_mode=2
+
+#uncomment to overclock the arm. 700 MHz is the default.
+#arm_freq=800
+
+# Uncomment some or all of these to enable the optional hardware interfaces
+#dtparam=i2c_arm=on
+#dtparam=i2s=on
+#dtparam=spi=on
+
+# Uncomment this to enable infrared communication.
+#dtoverlay=gpio-ir,gpio_pin=17
+#dtoverlay=gpio-ir-tx,gpio_pin=18
+
+# Additional overlays and parameters are documented /boot/overlays/README
+
+# Enable audio (loads snd_bcm2835)
+dtparam=audio=on
+
+[pi4]
+# Enable DRM VC4 V3D driver on top of the dispmanx display stack
+dtoverlay=vc4-fkms-v3d
+max_framebuffers=2
+
+[all]
+#dtoverlay=vc4-fkms-v3d
+max_usb_current=1
+hdmi_force_hotplug=1
+config_hdmi_boost=7
+hdmi_group=2
+hdmi_mode=1
+hdmi_mode=87
+hdmi_drive=1
+display_roate=0
+
+hdmi_cvt 1280 1024 60 6 0 0 0
+# 分辨率 频率
