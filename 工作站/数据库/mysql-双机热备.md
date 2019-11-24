@@ -4,7 +4,7 @@
 name: 
     mysql_1
 Volume:
-    - /home/lemon/Mariadb/master1:/etc/mysql
+    - /home/lemon/mysql/mysql_1:/etc/mysql/conf.d
     - mariadb_master_1:/var/lib/mysql
 enoviment:
     - MYSQL_ROOT_PASSWORD: Fq7C67%D
@@ -91,8 +91,8 @@ select * from mysql.user;
 show master status;
 ```
 
-> | File          | Position |
-> | binlog.000003 |     1382 |
+> | File             | Position |
+> | mysql-bin.000002 |     154 |
 
 ### 进入mysql2 配置
 
@@ -101,7 +101,7 @@ show master status;
 // master_host即为容器IP
 // master_log_file和master_log_pos即为在mone容器中，通过show master status查出来的值；
 
-change master to master_host='172.18.1.2',master_user='slave',master_password='A9o5p8!V',master_log_file='binlog.000003',master_log_pos=1382,master_port=3306;
+change master to master_host='172.18.1.2',master_user='slave',master_password='A9o5p8!V',master_log_file='mysql-bin.000002',master_log_pos=154,master_port=3306;
 
 //启动同步
 start slave ;
@@ -129,14 +129,14 @@ select * from mysql.user;
 
 ```
 
-> | File          | Position | 
-> | binlog.000003 |      872 |
+> | File             | Position |
+> | mysql-bin.000001 |      1006 |
 
 ### 进入mysql1 配置
 
 ```sql
 
-change master to master_host='172.18.1.3',master_user='slave',master_password='A9o5p8!V',master_log_file='binlog.000003',master_log_pos=872,master_port=3306;
+change master to master_host='172.18.1.3',master_user='slave',master_password='A9o5p8!V',master_log_file='mysql-bin.000001',master_log_pos=1006,master_port=3306;
 
 //启动同步
 start slave ;
