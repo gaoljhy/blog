@@ -6,7 +6,7 @@
 
 打开 “终端” ，复制黏贴下面的命令，回车执行，重启Mac即可生效。
 
-`defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE`
+`defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool FALSE`
 
 ## 恢复.DS_store生成
 
