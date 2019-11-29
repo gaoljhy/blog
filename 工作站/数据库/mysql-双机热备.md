@@ -101,7 +101,7 @@ show master status;
 // master_host即为容器IP
 // master_log_file和master_log_pos即为在mone容器中，通过show master status查出来的值；
 
-change master to master_host='172.18.1.2',master_user='slave',master_password='A9o5p8!V',master_log_file='mysql-bin.000002',master_log_pos=154,master_port=3306;
+change master to master_host='172.18.1.2',master_user='slave',master_password='A9o5p8!V',master_log_file='mysql-bin.000004',master_log_pos=17864,master_port=3306;
 
 //启动同步
 start slave ;
@@ -136,7 +136,7 @@ select * from mysql.user;
 
 ```sql
 
-change master to master_host='172.18.1.3',master_user='slave',master_password='A9o5p8!V',master_log_file='mysql-bin.000001',master_log_pos=1006,master_port=3306;
+change master to master_host='172.18.1.3',master_user='slave',master_password='A9o5p8!V',master_log_file='mysql-bin.000004',master_log_pos=19481,master_port=3306;
 
 //启动同步
 start slave ;

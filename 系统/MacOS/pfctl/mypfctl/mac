@@ -1,0 +1,4 @@
+block drop out quick on en0 from any to 17.57.145.24
+block drop out quick on en1 from any to 17.57.145.24
+block drop in quick on en0 from 17.57.145.24 to any
+block drop in quick on en1 from 17.57.145.24 to any
