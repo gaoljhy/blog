@@ -1,76 +1,152 @@
 # For more options and information see
+
 # http://rpf.io/configtxt
+
 # Some settings may impact device functionality. See link above for details
 
 # uncomment if you get no picture on HDMI for a default "safe" mode
+
 #hdmi_safe=1
 
 # uncomment this if your display has a black border of unused pixels visible
+
 # and your display can output without overscan
+
 #disable_overscan=1
 
 # uncomment the following to adjust overscan. Use positive numbers if console
+
 # goes off screen, and negative if there is too much border
+
 #overscan_left=16
 #overscan_right=16
 #overscan_top=16
 #overscan_bottom=16
 
 # uncomment to force a console size. By default it will be display's size minus
+
 # overscan.
+
 #framebuffer_width=1280
 #framebuffer_height=720
 
 # uncomment if hdmi display is not detected and composite is being output
+
 #hdmi_force_hotplug=1
 
 # uncomment to force a specific HDMI mode (this will force VGA)
+
 #hdmi_group=1
 #hdmi_mode=1
 
 # uncomment to force a HDMI mode rather than DVI. This can make audio work in
+
 # DMT (computer monitor) modes
+
 #hdmi_drive=2
 
 # uncomment to increase signal to HDMI, if you have interference, blanking, or
+
 # no display
+
 #config_hdmi_boost=4
 
 # uncomment for composite PAL
+
 #sdtv_mode=2
 
 #uncomment to overclock the arm. 700 MHz is the default.
 #arm_freq=800
 
 # Uncomment some or all of these to enable the optional hardware interfaces
+
 #dtparam=i2c_arm=on
 #dtparam=i2s=on
 #dtparam=spi=on
 
-# Uncomment this to enable infrared communication.
-#dtoverlay=gpio-ir,gpio_pin=17
-#dtoverlay=gpio-ir-tx,gpio_pin=18
+# Uncomment this to enable the lirc-rpi module
+
+#dtoverlay=lirc-rpi
 
 # Additional overlays and parameters are documented /boot/overlays/README
 
 # Enable audio (loads snd_bcm2835)
+
 dtparam=audio=on
 
-[pi4]
+#[pi4]
+
 # Enable DRM VC4 V3D driver on top of the dispmanx display stack
-dtoverlay=vc4-fkms-v3d
-max_framebuffers=2
+
+#dtoverlay=vc4-fkms-v3d
+#max_framebuffers=2
 
 [all]
 #dtoverlay=vc4-fkms-v3d
-max_usb_current=1
-hdmi_force_hotplug=1
-config_hdmi_boost=7
-hdmi_group=2
-hdmi_mode=1
-hdmi_mode=87
-hdmi_drive=1
-display_roate=0
 
-hdmi_cvt 1280 1024 60 6 0 0 0
+# If you would like to enable USB booting on your Pi, uncomment the following line.
+
+# Boot from microsd card with it, then reboot.
+
+# Don't forget to comment this back out after using, especially if you plan to use
+
+# sdcard with multiple machines!
+
+# NOTE: This ONLY works with the Raspberry Pi 3+
+
+#program_usb_boot_mode=1
+[pi2]
+
+# Pi2 is 64bit only on v1.2+
+
+# 64bit kernel for Raspberry Pi 2 is called kernel8 (armv8a)
+
+kernel=kernel8-alt.img
+[pi3]
+
+# 64bit kernel for Raspberry Pi 3 is called kernel8 (armv8a)
+
+kernel=kernel8-alt.img
+[pi4]
+
+# Enable DRM VC4 V3D driver on top of the dispmanx display stack
+
+#dtoverlay=vc4-fkms-v3d
+#max_framebuffers=2
+
+# 64bit kernel for Raspberry Pi 4 is called kernel8l (armv8a)
+
+kernel=kernel8l-alt.img
+[all]
+
+# Tell firmware to go 64bit mode.
+
+arm_64bit=1
+
+dtoverlay=vc4-fkms-v3d
+max_usb_current=2
+
+hdmi_force_hotplug=1
+config_hdmi_boost=4
+hdmi_group=2
+
+# hdmi_mode=1
+
+# hdmi_mode=9
+
+# hdmi_mode=87
+
+hdmi_mode=35
+
+# hdmi_drive=1
+
+display_roate=0
+disable_overscan=1
+
+# hdmi_cvt 1024 768 60 6 0 0 0
+
+# hdmi_ignore_edid=0xa5000080
+
+# hdmi_cvt 1024 768 60 6 0 0 0
+
 # 分辨率 频率
