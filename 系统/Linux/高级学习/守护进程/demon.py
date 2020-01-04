@@ -60,10 +60,10 @@ class CDaemon:
         sys.stdout.flush()
         sys.stderr.flush()
 
-        si = file(self.stdin, 'r')
-        so = file(self.stdout, 'a+')
+        si = open(self.stdin, 'r')
+        so = open(self.stdout, 'a+')
         if self.stderr:
-            se = file(self.stderr, 'a+', 0)
+            se = open(self.stderr, 'a+')
         else:
             se = so
 
@@ -81,11 +81,11 @@ class CDaemon:
 
         atexit.register(self.del_pid)
         pid = str(os.getpid())
-        file(self.pidfile, 'w+').write('%s\n' % pid)
+        open(self.pidfile, 'w+').write('%s\n' % pid)
 
     def get_pid(self):
         try:
-            pf = file(self.pidfile, 'r')
+            pf = open(self.pidfile, 'r')
             pid = int(pf.read().strip())
             pf.close()
         except IOError:
